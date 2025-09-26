@@ -69,110 +69,25 @@ function SkillsSection() {
           </p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {Object.entries(skillCategories).map(([category, skills]) => (
-            <div key={category} className="p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] bg-white/80 border-gray-200 hover:border-blue-500/50 shadow-xl backdrop-blur-sm">
-
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">
-                  <span className={`${
-                    category === 'Programming Languages' ? 'text-blue-600' :
-                    category === 'Web Development' ? 'text-green-600' :
-                    category === 'Database' ? 'text-purple-600' :
-                    'text-pink-600'
-                  }`}>
-                    {category.toUpperCase()}
-                  </span>
-                </h3>
-                <div className={`h-1 w-16 rounded-full ${
-                  category === 'Programming Languages' ? 'bg-blue-600' :
-                  category === 'Web Development' ? 'bg-green-600' :
-                  category === 'Database' ? 'bg-purple-600' :
-                  'bg-pink-600'
-                }`}></div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                {skills.map((skill, index) => (
-                  <div key={index} className="group p-4 rounded-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gray-50 hover:bg-gray-100">
-                    <div className="flex justify-center mb-3">
-                      <div className="bg-white rounded-full p-2 w-12 h-12 flex items-center justify-center">
-                        <img 
-                          src={skill.logo} 
-                          alt={skill.name}
-                          className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                            e.currentTarget.parentElement?.nextElementSibling?.classList.remove('hidden');
-                          }}
-                        />
-                      </div>
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-lg font-bold hidden ${
-                        category === 'Programming Languages' ? 'bg-blue-100 text-blue-600' :
-                        category === 'Web Development' ? 'bg-green-100 text-green-600' :
-                        category === 'Database' ? 'bg-purple-100 text-purple-600' :
-                        'bg-pink-100 text-pink-600'
-                      }`}>
-                        {skill.name.charAt(0)}
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900">
-                        {skill.name}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Additional Tools */}
-        <div className="mb-12">
-          <h3 className="text-3xl font-bold text-center mb-8 text-orange-600">Additional Tools</h3>
-          <div className="grid md:grid-cols-1 gap-8">
-            {additionalTools.map((toolGroup, index) => (
-              <div key={index} className="p-8 rounded-2xl border transition-all duration-300 hover:scale-[1.02] bg-white/80 border-gray-200 hover:border-orange-500/50 shadow-xl backdrop-blur-sm">
-                
-                <div className="mb-6">
-                  <h4 className="text-2xl font-bold mb-2 text-orange-600">
-                    {toolGroup.category.toUpperCase()}
-                  </h4>
-                  <div className="h-1 w-16 bg-orange-600 rounded-full"></div>
+        {/* One single grid with all logos + names (flattened categories + additional tools) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12">
+          {(() => {
+            // flatten skillCategories and additionalTools into a single array
+            const items: { name: string; logo: string; category?: string }[] = []
+            Object.entries(skillCategories).forEach(([category, skills]) => {
+              skills.forEach((s) => items.push({ name: s.name, logo: s.logo, category }))
+            })
+            additionalTools.forEach((g) => g.tools.forEach((t) => items.push({ name: t.name, logo: t.logo, category: g.category })))
+            return items.map((skill, idx) => (
+              <div key={idx} className="flex flex-col items-center p-3 bg-white/80 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
+                <div className="bg-white rounded-full p-2 w-16 h-16 flex items-center justify-center mb-2">
+                  <img src={skill.logo} alt={skill.name} className="w-10 h-10 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                 </div>
-                
-                <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-3 gap-6">
-                  {toolGroup.tools.map((tool, toolIndex) => (
-                    <div key={toolIndex} className="group p-6 rounded-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-gray-50 hover:bg-gray-100">
-                      <div className="flex justify-center mb-4">
-                        <div className="bg-white rounded-full p-2 w-16 h-16 flex items-center justify-center">
-                          <img 
-                            src={tool.logo} 
-                            alt={tool.name}
-                            className="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
-                            onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                              e.currentTarget.parentElement?.nextElementSibling?.classList.remove('hidden');
-                            }}
-                          />
-                        </div>
-                        <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-2xl font-bold hidden">
-                          {tool.name.charAt(0)}
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900">
-                          {tool.name}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <div className="text-sm font-medium text-gray-800 text-center">{skill.name}</div>
+                {skill.category && <div className="text-xs text-gray-500 mt-1">{skill.category}</div>}
               </div>
-            ))}
-          </div>
+            ))
+          })()}
         </div>
 
         {/* Summary */}
