@@ -60,41 +60,7 @@ function EducationSection() {
           </div>
         </div>
 
-        {/* Additional Section - Languages & Skills */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          
-          {/* Additional Skills/Languages */}
-          <div className="p-6 rounded-xl border bg-white/60 border-gray-200 backdrop-blur-sm">
-            <h3 className="text-xl font-bold mb-4 text-green-600">
-              Languages & Additional Skills
-            </h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">Languages</h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>English</span>
-                    <span className="text-green-600">Fluent</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sinhala</span>
-                    <span className="text-green-600">Native</span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">Soft Skills</h4>
-                <div className="flex flex-wrap gap-2">
-                  {['Team Leadership', 'Problem Solving', 'Communication', 'Project Management'].map((skill, index) => (
-                    <span key={index} className="px-2 py-1 rounded text-xs bg-green-100 text-green-800">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </section>
   )

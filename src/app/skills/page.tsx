@@ -21,6 +21,7 @@ function SkillsSection() {
       { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
       { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
       { name: "Socket.io", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
+        { name: "Ballerina", logo:"https://ballerina.io/img/branding/ballerina_logo_dgrey_png.png"},
       { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" }
     ],
     "Database": [
@@ -29,7 +30,7 @@ function SkillsSection() {
       { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
     ],
     "Mobile App Development": [
-      { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react-native/react-native-original.svg" },
+      { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
     ],
     "Version Control": [
       { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
@@ -78,21 +79,29 @@ function SkillsSection() {
               skills.forEach((s) => items.push({ name: s.name, logo: s.logo, category }))
             })
             additionalTools.forEach((g) => g.tools.forEach((t) => items.push({ name: t.name, logo: t.logo, category: g.category })))
-            return items.map((skill, idx) => (
-              <div key={idx} className="flex flex-col items-center p-3 bg-white/80 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
-                <div className="bg-white rounded-full p-2 w-16 h-16 flex items-center justify-center mb-2">
-                  <img src={skill.logo} alt={skill.name} className="w-10 h-10 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            return items.map((skill, idx) => {
+              const isBallerina = skill.name && skill.name.toLowerCase() === 'ballerina'
+              return (
+                <div key={idx} className="flex flex-col items-center p-3 bg-white/80 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
+                  <div className={"bg-white rounded-full p-2 flex items-center justify-center mb-2 " + (isBallerina ? 'w-20 h-20' : 'w-16 h-16')}>
+                    <img
+                      src={skill.logo}
+                      alt={skill.name}
+                      className={(isBallerina ? 'w-14 h-14' : 'w-10 h-10') + ' object-contain'}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  </div>
+                  <div className="text-sm font-medium text-gray-800 text-center">{skill.name}</div>
+                  {skill.category && <div className="text-xs text-gray-500 mt-1">{skill.category}</div>}
                 </div>
-                <div className="text-sm font-medium text-gray-800 text-center">{skill.name}</div>
-                {skill.category && <div className="text-xs text-gray-500 mt-1">{skill.category}</div>}
-              </div>
-            ))
+              )
+            })
           })()}
         </div>
 
         {/* Summary */}
         <div className="text-center">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
               <div className="text-3xl font-bold text-blue-600 mb-2">3</div>
               <div className="text-sm text-gray-500">
@@ -100,9 +109,15 @@ function SkillsSection() {
               </div>
             </div>
             <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-green-600 mb-2">11</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">12</div>
               <div className="text-sm text-gray-500">
                 Web Technologies
+              </div>
+            </div>
+            <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-green-600 mb-2">1</div>
+              <div className="text-sm text-gray-500">
+                Mobile App Development
               </div>
             </div>
             <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">

@@ -144,7 +144,16 @@ export default function ContactPage() {
 
            {/* Social Links */}
            <div>
-             <h3 className="text-2xl font-bold mb-6 text-purple-600">Follow Me</h3>
+             <div className="flex items-center justify-between mb-6">
+               <h3 className="text-2xl font-bold text-purple-600">Follow Me</h3>
+               <a
+                 href="/resume.pdf"
+                 download
+                 className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow hover:scale-105 transition-transform"
+               >
+                 Download Resume
+               </a>
+             </div>
              <div className="flex space-x-4">
                {socialLinks.map((social, index) => (
                  <a 
