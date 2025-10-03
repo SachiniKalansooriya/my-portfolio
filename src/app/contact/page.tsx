@@ -22,15 +22,33 @@ export default function ContactPage() {
    e.preventDefault()
    setIsSubmitting(true)
    
-   // Simulate form submission
-   setTimeout(() => {
-     setSubmitStatus('Message sent successfully! I\'ll get back to you soon.')
-     setIsSubmitting(false)
-     setFormData({ name: '', email: '', subject: '', message: '' })
+   try {
+     // Send to our API route
+     const response = await fetch('/api/send-email', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(formData),
+     })
      
-     // Clear success message after 5 seconds
+     const data = await response.json()
+     
+     if (response.ok) {
+       setSubmitStatus('Message sent successfully! I\'ll get back to you soon.')
+       setFormData({ name: '', email: '', subject: '', message: '' })
+     } else {
+       setSubmitStatus(`Failed to send message: ${data.error || 'Unknown error'}`)
+     }
+   } catch (error) {
+     setSubmitStatus('Failed to send message. Please try again later.')
+     console.error('Error sending email:', error)
+   } finally {
+     setIsSubmitting(false)
+     
+     // Clear status message after 5 seconds
      setTimeout(() => setSubmitStatus(''), 5000)
-   }, 2000)
+   }
  }
 
  const contactInfo = [
@@ -281,9 +299,13 @@ export default function ContactPage() {
                )}
              </button>
 
-             {/* Success Message */}
+             {/* Status Message */}
              {submitStatus && (
-              <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-600 text-center font-medium">
+              <div className={`p-4 ${
+                submitStatus.toLowerCase().includes('failed') 
+                  ? 'bg-red-500/20 border border-red-500/50 text-red-600' 
+                  : 'bg-green-500/20 border border-green-500/50 text-green-600'
+              } rounded-lg text-center font-medium`}>
                  {submitStatus}
                </div>
              )}
