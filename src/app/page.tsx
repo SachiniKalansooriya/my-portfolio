@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -85,7 +86,7 @@ export default function Home() {
       const data = await response.json()
       
       if (response.ok) {
-        setSubmitStatus('Message sent successfully! I\'ll get back to you soon.')
+        setSubmitStatus('Message sent successfully! I&apos;ll get back to you soon.')
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
         setSubmitStatus(`Failed to send message: ${data.error || 'Unknown error'}`)
@@ -327,7 +328,7 @@ export default function Home() {
                 <span className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></span>
                 <span className="relative">Download CV</span>
               </a>
-              <a href="#contact" className="inline-flex items-center px-5 py-3 border border-purple-500/60 bg-purple-500/10 backdrop-blur-md text-[var(--text)] rounded-md hover:bg-purple-500/20 hover:border-purple-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">Let's talk</a>
+              <a href="#contact" className="inline-flex items-center px-5 py-3 border border-purple-500/60 bg-purple-500/10 backdrop-blur-md text-[var(--text)] rounded-md hover:bg-purple-500/20 hover:border-purple-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">Let&apos;s talk</a>
             </div>
 
             <div className="flex items-center gap-4 mt-4">
@@ -349,7 +350,7 @@ export default function Home() {
 
                 {/* portrait (increased size) */}
                 <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-gray-500 shadow-2xl">
-                  <img src="/propic.png" alt="Profile" className="w-full h-full object-cover" />
+                  <Image src="/propic.png" alt="Profile" className="w-full h-full object-cover" width={384} height={384} />
                 </div>
             </div>
           </div>
@@ -731,12 +732,6 @@ export default function Home() {
                             
 
                             
-                            {/* Image Counter for Mobile */}
-                            {project.images.length > 1 && (
-                              <div className="absolute top-8 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full z-20">
-                                {(currentImageIndex[project.id] || 0) + 1} / {project.images.length}
-                              </div>
-                            )}
                           </div>
                         </div>
                         
@@ -802,10 +797,6 @@ export default function Home() {
                               {/* Navigation Arrows for Laptop */}
                               {project.images.length > 1 && (
                                 <>
-                                  {/* Image Counter for Laptop */}
-                                  <div className="absolute top-10 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full z-20">
-                                    {(currentImageIndex[project.id] || 0) + 1} / {project.images.length}
-                                  </div>
                                 </>
                               )}
                             </div>
@@ -881,8 +872,8 @@ export default function Home() {
               Get In Touch
             </h2>
             <p className="text-lg text-purple-300 tracking-wide max-w-2xl mx-auto font-satisfy">
-              I'm always interested in new opportunities and exciting projects. 
-              Whether you want to discuss a project, job opportunity, or just say hello, I'd love to hear from you!
+              I&apos;m always interested in new opportunities and exciting projects. 
+              Whether you want to discuss a project, job opportunity, or just say hello, I&apos;d love to hear from you!
             </p>
           </div>
 
