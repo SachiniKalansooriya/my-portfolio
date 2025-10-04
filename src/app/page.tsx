@@ -1,7 +1,17 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0f1724] text-white">
-  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 py-12">
+    <main className="min-h-screen text-white relative">
+      {/* Background image with glassy overlay - Fixed to viewport */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ backgroundImage: 'url(/background.jpg)' }}
+      />
+      <div className="fixed inset-0 bg-black/30 backdrop-blur-[2px]" />
+      
+      {/* Glass effect overlay */}
+      <div className="fixed inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/20" />
+      
+      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 py-12 relative z-10">
   
 
   <section className="grid grid-cols-1 lg:grid-cols-2 items-start gap-8 pt-6 pb-12">

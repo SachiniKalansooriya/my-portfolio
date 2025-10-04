@@ -189,7 +189,17 @@ export default function ProjectsPage() {
 
   return (
     <section className="h-full overflow-hidden relative">
-      <div className="container mx-auto px-4 py-8 h-full max-w-5xl">
+      {/* Background image with glassy overlay - Fixed to viewport */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ backgroundImage: 'url(/background.jpg)' }}
+      />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-[1px]" />
+      
+      {/* Glass effect overlay */}
+      <div className="fixed inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+      
+      <div className="container mx-auto px-4 py-8 h-full max-w-5xl relative z-10">
         {/* Project Navigation - Left/Right arrows */}
         <button 
           onClick={prevProject} 
