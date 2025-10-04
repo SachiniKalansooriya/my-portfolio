@@ -725,32 +725,7 @@ export default function Home() {
                               />
                             </div>
                             
-                            {/* Navigation Arrows for Mobile */}
-                            {project.images.length > 1 && (
-                              <>
-                                {/* Previous Button */}
-                                <button
-                                  onClick={() => prevImage(project.id, project.images.length)}
-                                  className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
-                                  suppressHydrationWarning
-                                >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                  </svg>
-                                </button>
-                                
-                                {/* Next Button */}
-                                <button
-                                  onClick={() => nextImage(project.id, project.images.length)}
-                                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
-                                  suppressHydrationWarning
-                                >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                  </svg>
-                                </button>
-                              </>
-                            )}
+
                             
                             {/* Image Counter for Mobile */}
                             {project.images.length > 1 && (
@@ -760,6 +735,33 @@ export default function Home() {
                             )}
                           </div>
                         </div>
+                        
+                        {/* Navigation Arrows for Mobile - Below the frame */}
+                        {project.images.length > 1 && (
+                          <div className="flex justify-center mt-4 space-x-4">
+                            {/* Previous Button */}
+                            <button
+                              onClick={() => prevImage(project.id, project.images.length)}
+                              className="w-10 h-10 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-blue-400/50"
+                              suppressHydrationWarning
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                              </svg>
+                            </button>
+                            
+                            {/* Next Button */}
+                            <button
+                              onClick={() => nextImage(project.id, project.images.length)}
+                              className="w-10 h-10 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-blue-400/50"
+                              suppressHydrationWarning
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </button>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       /* Laptop Frame for Web Apps */
@@ -796,35 +798,11 @@ export default function Home() {
                               {/* Navigation Arrows for Laptop */}
                               {project.images.length > 1 && (
                                 <>
-                                  {/* Previous Button */}
-                                  <button
-                                    onClick={() => prevImage(project.id, project.images.length)}
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
-                                    suppressHydrationWarning
-                                  >
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                  </button>
-                                  
-                                  {/* Next Button */}
-                                  <button
-                                    onClick={() => nextImage(project.id, project.images.length)}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/70 hover:bg-black/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 z-20"
-                                    suppressHydrationWarning
-                                  >
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                  </button>
+                                  {/* Image Counter for Laptop */}
+                                  <div className="absolute top-10 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full z-20">
+                                    {(currentImageIndex[project.id] || 0) + 1} / {project.images.length}
+                                  </div>
                                 </>
-                              )}
-                              
-                              {/* Image Counter for Laptop */}
-                              {project.images.length > 1 && (
-                                <div className="absolute top-10 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full z-20">
-                                  {(currentImageIndex[project.id] || 0) + 1} / {project.images.length}
-                                </div>
                               )}
                             </div>
                           </div>
@@ -838,6 +816,33 @@ export default function Home() {
                           {/* Laptop Stand */}
                           <div className="bg-gray-600 h-2 rounded-b mx-auto w-3/4 relative"></div>
                         </div>
+                        
+                        {/* Navigation Arrows for Laptop - Below the frame */}
+                        {project.images.length > 1 && (
+                          <div className="flex justify-center mt-4 space-x-4">
+                            {/* Previous Button */}
+                            <button
+                              onClick={() => prevImage(project.id, project.images.length)}
+                              className="w-10 h-10 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-blue-400/50"
+                              suppressHydrationWarning
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                              </svg>
+                            </button>
+                            
+                            {/* Next Button */}
+                            <button
+                              onClick={() => nextImage(project.id, project.images.length)}
+                              className="w-10 h-10 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-blue-400/50"
+                              suppressHydrationWarning
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </button>
+                          </div>
+                        )}
                       </div>
                     )}
                     
