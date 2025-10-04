@@ -15,14 +15,27 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--text);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: system-ui, monospace;
+  --font-title: var(--font-cinzel);
 }
 
 body {
   background: var(--background);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.font-title {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+}
+
+.font-libre {
+  font-family: var(--font-libre-baskerville), 'Libre Baskerville', Georgia, serif;
+}
+
+.font-satisfy {
+  font-family: var(--font-satisfy), 'Satisfy', cursive;
 }
 
 @keyframes shimmer {
