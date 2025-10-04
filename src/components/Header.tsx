@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="backdrop-blur-md bg-black/60 border-b border-white/6">
+      <div className="backdrop-blur-md bg-black/10  ">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="text-2xl font-bold text-pink-500">Sachini</div>
 
