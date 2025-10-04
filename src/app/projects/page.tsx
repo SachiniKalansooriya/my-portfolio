@@ -9,7 +9,7 @@ type Project = {
   technologies: string[]
   description?: string
   responsibilities?: string[]
-  image?: string
+  images?: string[] // Updated to array of images
   demoLink?: string
   githubLink?: string
   type?: string
@@ -30,7 +30,12 @@ const projects: Project[] = [
       "Enabled users to create, save, and load custom designs.",
       "Built backend APIs for efficient user data storage and feature support",
     ],
-    image: "/webcad-screenshot.jpg",
+    images: [
+      "/webcad1.png",
+      "/webcad2.png",
+      "/webcad3.png",
+      "/webcad4.png"
+    ],
     demoLink: "#",
     githubLink: "#",
     type: "Web Application",
@@ -48,7 +53,13 @@ const projects: Project[] = [
       "Built the wardrobe management system with database integration",
       "Implemented outfit recommendation logic based on wardrobe, weather, and user preferences",
     ],
-    image: "/talky-screenshot.jpg",
+    images: [
+      "/styra1.png",
+      "/styra2.png",
+      "/styra3.png",
+      "/styra4.png"
+
+    ],
     demoLink: "#",
     githubLink: "#",
     type: "Mobile Application",
@@ -66,7 +77,11 @@ const projects: Project[] = [
       "Implemented authentication and profile uploads",
       "Designed the MongoDB schema and APIs",
     ],
-    image: "/talky-screenshot.jpg",
+    images: [
+      "/chatly1.png",
+      "/chatly2.png",
+      "/chatly3.png"
+    ],
     demoLink: "#",
     githubLink: "#",
     type: "Web Application",
@@ -84,7 +99,15 @@ const projects: Project[] = [
       "Developed route selection, filtering, and interactive map features",
       "Implemented real-time updates for reports and comments",
     ],
-    image: "/talky-screenshot.jpg",
+    images: [
+      "/saferoute4.jpg",
+      "/saferoute3.jpg",
+      "/saferoute9.png",
+      "/saferoute10.png",
+      "/saferoute7.jpg",
+     "/saferoute2.jpg",
+      "/saferoute5.jpg"
+    ],
     demoLink: "#",
     githubLink: "#",
     type: "Web Application",
@@ -102,7 +125,9 @@ const projects: Project[] = [
       "Integrated motors and sensors for dispensing",
       "Built Firebase integration for notifications",
     ],
-    image: "/medisync-screenshot.jpg",
+    images: [
+      "/medisync.png"
+    ],
     demoLink: "#",
     githubLink: "#",
     type: "IoT Hardware",
@@ -110,32 +135,77 @@ const projects: Project[] = [
 ]
 
 export default function ProjectsPage() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const next = () => setCurrentIndex((i) => (i + 1) % projects.length)
-  const prev = () => setCurrentIndex((i) => (i - 1 + projects.length) % projects.length)
-  const goTo = (idx: number) => setCurrentIndex(idx)
+  const nextProject = () => {
+    setCurrentProjectIndex((i) => (i + 1) % projects.length)
+    setCurrentImageIndex(0) // Reset image index when changing projects
+  }
+  
+  const prevProject = () => {
+    setCurrentProjectIndex((i) => (i - 1 + projects.length) % projects.length)
+    setCurrentImageIndex(0) // Reset image index when changing projects
+  }
+  
+  const goToProject = (idx: number) => {
+    setCurrentProjectIndex(idx)
+    setCurrentImageIndex(0) // Reset image index when changing projects
+  }
+  
+  const nextImage = () => {
+    const p = projects[currentProjectIndex]
+    if (p.images && p.images.length > 0) {
+      if (p.id === 2) {
+        // For STYRA, navigate by pairs (increment by 2)
+        setCurrentImageIndex((i) => {
+          const nextIndex = i + 2;
+          return nextIndex >= p.images!.length ? 0 : nextIndex;
+        })
+      } else {
+        // For other projects, navigate normally
+        setCurrentImageIndex((i) => (i + 1) % p.images!.length)
+      }
+    }
+  }
+  
+  const prevImage = () => {
+    const p = projects[currentProjectIndex]
+    if (p.images && p.images.length > 0) {
+      if (p.id === 2) {
+        // For STYRA, navigate by pairs (decrement by 2)
+        setCurrentImageIndex((i) => {
+          const prevIndex = i - 2;
+          return prevIndex < 0 ? Math.max(0, p.images!.length - 2) : prevIndex;
+        })
+      } else {
+        // For other projects, navigate normally
+        setCurrentImageIndex((i) => (i - 1 + p.images!.length) % p.images!.length)
+      }
+    }
+  }
 
-  const p = projects[currentIndex]
+  const p = projects[currentProjectIndex]
 
   return (
     <section className="h-full overflow-hidden relative">
-      <div className="container mx-auto px-4 py-8 h-full max-w-3xl">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            My Projects
-          </h2>
-          <p className="text-gray-600">Selected work and demos</p>
-        </div>
-
-        {/* Left/Right arrows stay in place */}
-        <button onClick={prev} className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border shadow">
+      <div className="container mx-auto px-4 py-8 h-full max-w-5xl">
+        {/* Project Navigation - Left/Right arrows */}
+        <button 
+          onClick={prevProject} 
+          className="absolute left-8 md:left-16 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border shadow hover:bg-gray-100 transition-colors"
+          aria-label="Previous Project"
+        >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
-        <button onClick={next} className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border shadow">
+        <button 
+          onClick={nextProject} 
+          className="absolute right-8 md:right-16 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border shadow hover:bg-gray-100 transition-colors"
+          aria-label="Next Project"
+        >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
@@ -143,13 +213,81 @@ export default function ProjectsPage() {
 
         {/* Card */}
         <div className="mt-6 rounded-2xl overflow-hidden border bg-white/80 shadow">
-          {/* Image top */}
-          <div className="w-full h-64 bg-gray-100">
-            {p.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={p.image} alt={`${p.title} screenshot`} className="w-full h-full object-cover" />
+          {/* Image top with carousel */}
+          <div className="w-full h-[500px] bg-gray-50 relative overflow-hidden">
+            {/* Image carousel */}
+            {p.images && p.images.length > 0 ? (
+              <div className="w-full h-full relative">
+                {/* Special layout for STYRA - show 2 images side by side */}
+                {p.id === 2 ? (
+                  <div className="w-full h-full grid grid-cols-2 gap-4 p-6">
+                    {/* Left image */}
+                    <div className="flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src={p.images[currentImageIndex]} 
+                        alt={`${p.title} screenshot ${currentImageIndex + 1}`} 
+                        className="max-w-full max-h-[450px] object-contain shadow-xl rounded-lg" 
+                      />
+                    </div>
+                    {/* Right image */}
+                    <div className="flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src={p.images[currentImageIndex + 1] || p.images[0]} 
+                        alt={`${p.title} screenshot ${(currentImageIndex + 1) % p.images.length + 1}`} 
+                        className="max-w-full max-h-[450px] object-contain shadow-xl rounded-lg" 
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  /* Regular single image layout for other projects */
+                  <div className="w-full h-full flex items-center justify-center p-6">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      src={p.images[currentImageIndex]} 
+                      alt={`${p.title} screenshot ${currentImageIndex + 1}`} 
+                      className="max-w-full max-h-[450px] object-contain shadow-xl rounded-lg" 
+                    />
+                  </div>
+                )}
+                
+                {/* Image counter */}
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-2 rounded-full text-sm font-medium">
+                  {p.id === 2 ? 
+                    `${Math.floor(currentImageIndex / 2) + 1} / ${Math.ceil(p.images.length / 2)}` :
+                    `${currentImageIndex + 1} / ${p.images.length}`
+                  }
+                </div>
+                
+                {/* Image navigation arrows */}
+                {((p.id === 2 && p.images.length > 2) || (p.id !== 2 && p.images.length > 1)) && (
+                  <>
+                    <button 
+                      onClick={prevImage}
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors shadow-lg"
+                      aria-label="Previous Image"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button 
+                      onClick={nextImage}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors shadow-lg"
+                      aria-label="Next Image"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white bg-gradient-to-br from-blue-500 to-purple-600">Screenshot</div>
+              <div className="w-full h-full flex items-center justify-center text-white bg-gradient-to-br from-blue-500 to-purple-600">
+                No Screenshots Available
+              </div>
             )}
           </div>
 
@@ -206,10 +344,15 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* Dots */}
+        {/* Project Navigation Dots */}
         <div className="flex justify-center gap-2 mt-4">
           {projects.map((_, i) => (
-            <button key={i} onClick={() => goTo(i)} className={`${i === currentIndex ? 'w-3 h-3 bg-blue-400 scale-110' : 'w-3 h-3 bg-gray-400'} rounded-full transition`} />
+            <button 
+              key={i} 
+              onClick={() => goToProject(i)} 
+              className={`${i === currentProjectIndex ? 'w-3 h-3 bg-blue-400 scale-110' : 'w-3 h-3 bg-gray-400'} rounded-full transition`}
+              aria-label={`Go to project ${i + 1}`}
+            />
           ))}
         </div>
       </div>

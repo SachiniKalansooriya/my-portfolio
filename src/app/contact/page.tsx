@@ -126,7 +126,7 @@ export default function ContactPage() {
          <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
            Get In Touch
          </h2>
-         <p className="text-xl max-w-2xl mx-auto text-gray-600">
+         <p className="text-base max-w-2xl mx-auto text-gray-600">
            I'm always interested in new opportunities and exciting projects. 
            Whether you want to discuss a project, job opportunity, or just say hello, I'd love to hear from you!
          </p>
