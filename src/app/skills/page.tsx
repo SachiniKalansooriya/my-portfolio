@@ -71,74 +71,239 @@ function SkillsSection() {
       
       <div className="container mx-auto px-4 py-8 max-w-7xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-sm">
             Technical Skills
           </h2>
-          <p className="text-xl text-white/90">
+          <p className="text-lg text-white/80 font-light tracking-wide">
             Technologies and tools I work with
           </p>
         </div>
 
-        {/* One single grid with all logos + names (flattened categories + additional tools) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12">
-          {(() => {
-            // flatten skillCategories and additionalTools into a single array
-            const items: { name: string; logo: string; category?: string }[] = []
-            Object.entries(skillCategories).forEach(([category, skills]) => {
-              skills.forEach((s) => items.push({ name: s.name, logo: s.logo, category }))
-            })
-            additionalTools.forEach((g) => g.tools.forEach((t) => items.push({ name: t.name, logo: t.logo, category: g.category })))
-            return items.map((skill, idx) => {
-              const isBallerina = skill.name && skill.name.toLowerCase() === 'ballerina'
-              return (
-                <div key={idx} className="flex flex-col items-center p-3 bg-white/80 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
-                  <div className={"bg-white rounded-full p-2 flex items-center justify-center mb-2 " + (isBallerina ? 'w-20 h-20' : 'w-16 h-16')}>
-                    <img
-                      src={skill.logo}
-                      alt={skill.name}
-                      className={(isBallerina ? 'w-14 h-14' : 'w-10 h-10') + ' object-contain'}
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
+        {/* Skills by Categories - Balanced Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
+          
+          {/* Programming Languages */}
+          <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-4">
+              <div className="text-center">
+                <h3 className="text-lg lg:text-xl font-bold text-white mb-1">
+                  <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                    Programming Languages
+                  </span>
+                </h3>
+                <div className="w-14 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto rounded-full"></div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {skillCategories["Programming Languages"].map((skill, idx) => (
+                  <div key={idx} className="flex flex-col items-center p-2 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    <div className="bg-white/20 rounded-lg p-1.5 flex items-center justify-center mb-1.5 w-10 h-10">
+                      <img src={skill.logo} alt={skill.name} className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    </div>
+                    <div className="text-xs font-semibold text-white/90 text-center">{skill.name}</div>
                   </div>
-                  <div className="text-sm font-medium text-gray-800 text-center">{skill.name}</div>
-                  {skill.category && <div className="text-xs text-gray-500 mt-1">{skill.category}</div>}
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Web Development */}
+          <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-blue-400/30 shadow-xl hover:shadow-blue-500/10 lg:col-span-2 xl:col-span-2">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/5 via-transparent to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-6">
+              <div className="text-center">
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">
+                  <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                    Web Development
+                  </span>
+                </h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-emerald-400 mx-auto rounded-full"></div>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                {skillCategories["Web Development"].map((skill, idx) => {
+                  const isBallerina = skill.name && skill.name.toLowerCase() === 'ballerina'
+                  return (
+                    <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-xl backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                      <div className={"bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 " + (isBallerina ? 'w-14 h-14' : 'w-12 h-12')}>
+                        <img
+                          src={skill.logo}
+                          alt={skill.name}
+                          className={(isBallerina ? 'w-10 h-10' : 'w-8 h-8') + ' object-contain'}
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
+                      </div>
+                      <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Database */}
+          <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-cyan-400/30 shadow-xl hover:shadow-cyan-500/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-4">
+              <div className="text-center">
+                <h3 className="text-lg lg:text-xl font-bold text-white mb-1">
+                  <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Database
+                  </span>
+                </h3>
+                <div className="w-14 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto rounded-full"></div>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                {skillCategories["Database"].map((skill, idx) => (
+                  <div key={idx} className="flex flex-col items-center p-2 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    <div className="bg-white/20 rounded-lg p-1.5 flex items-center justify-center mb-1.5 w-10 h-10">
+                      <img src={skill.logo} alt={skill.name} className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    </div>
+                    <div className="text-xs font-semibold text-white/90 text-center">{skill.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile App Development */}
+          <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-4">
+              <div className="text-center">
+                <h3 className="text-sm lg:text-base font-bold text-white mb-1">
+                  <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                    Mobile App Development
+                  </span>
+                </h3>
+                <div className="w-12 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto rounded-full"></div>
+              </div>
+              <div className="flex justify-center">
+                {skillCategories["Mobile App Development"].map((skill, idx) => (
+                  <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-1.5 w-12 h-12">
+                      <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    </div>
+                    <div className="text-xs font-semibold text-white/90 text-center">{skill.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Version Control */}
+          <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-cyan-400/30 shadow-xl hover:shadow-cyan-500/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-4">
+              <div className="text-center">
+                <h3 className="text-sm lg:text-base font-bold text-white mb-1">
+                  <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Version Control
+                  </span>
+                </h3>
+                <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto rounded-full"></div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {skillCategories["Version Control"].map((skill, idx) => (
+                  <div key={idx} className="flex flex-col items-center p-2 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    <div className="bg-white/20 rounded-lg p-1.5 flex items-center justify-center mb-1.5 w-10 h-10">
+                      <img src={skill.logo} alt={skill.name} className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    </div>
+                    <div className="text-xs font-semibold text-white/90 text-center">{skill.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Graphic Design */}
+          <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-blue-400/30 shadow-xl hover:shadow-blue-500/10">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/5 via-transparent to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10 space-y-4">
+              <div className="text-center">
+                <h3 className="text-sm lg:text-base font-bold text-white mb-1">
+                  <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                    Graphic Design
+                  </span>
+                </h3>
+                <div className="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-emerald-400 mx-auto rounded-full"></div>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {additionalTools[0].tools.map((tool, idx) => (
+                  <div key={idx} className="flex flex-col items-center p-2 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                    <div className="bg-white/20 rounded-lg p-1.5 flex items-center justify-center mb-1 w-10 h-10">
+                      <img src={tool.logo} alt={tool.name} className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    </div>
+                    <div className="text-xs font-semibold text-white/90 text-center leading-tight">{tool.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Single Item Categories */}
+          {["Project Management Tools", "UI/UX Designs", "Containerization"].map((category) => (
+            <div key={category} className="group relative bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 space-y-4">
+                <div className="text-center">
+                  <h3 className="text-sm lg:text-base font-bold text-white mb-1">
+                    <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                      {category}
+                    </span>
+                  </h3>
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto rounded-full"></div>
                 </div>
-              )
-            })
-          })()}
+                <div className="flex justify-center">
+                  {skillCategories[category as keyof typeof skillCategories]?.map((skill, idx) => (
+                    <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                      <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-1.5 w-12 h-12">
+                        <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      </div>
+                      <div className="text-xs font-semibold text-white/90 text-center">{skill.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Summary */}
         <div className="text-center">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-blue-600 mb-2">3</div>
-              <div className="text-sm text-gray-500">
+            <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-3xl font-bold text-emerald-400 mb-2">3</div>
+              <div className="relative z-10 text-sm text-white/70 font-medium">
                 Programming Languages
               </div>
             </div>
-            <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-green-600 mb-2">12</div>
-              <div className="text-sm text-gray-500">
+            <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-cyan-400/30 shadow-xl hover:shadow-cyan-500/10">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-3xl font-bold text-cyan-400 mb-2">12</div>
+              <div className="relative z-10 text-sm text-white/70 font-medium">
                 Web Technologies
               </div>
             </div>
-            <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-green-600 mb-2">1</div>
-              <div className="text-sm text-gray-500">
+            <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-blue-400/30 shadow-xl hover:shadow-blue-500/10">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400/5 via-transparent to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-3xl font-bold text-blue-400 mb-2">1</div>
+              <div className="relative z-10 text-sm text-white/70 font-medium">
                 Mobile App Development
               </div>
             </div>
-            <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-purple-600 mb-2">3</div>
-              <div className="text-sm text-gray-500">
+            <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-3xl font-bold text-emerald-300 mb-2">3</div>
+              <div className="relative z-10 text-sm text-white/70 font-medium">
                 Database Systems
               </div>
             </div>
-            <div className="p-6 rounded-xl border bg-white/80 border-gray-200 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-orange-600 mb-2">8</div>
-              <div className="text-sm text-gray-500">
+            <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-cyan-400/30 shadow-xl hover:shadow-cyan-500/10">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-3xl font-bold text-cyan-300 mb-2">8</div>
+              <div className="relative z-10 text-sm text-white/70 font-medium">
                 Development Tools
               </div>
             </div>

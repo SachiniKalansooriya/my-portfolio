@@ -200,94 +200,109 @@ export default function ProjectsPage() {
       <div className="fixed inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
       
       <div className="container mx-auto px-4 py-8 h-full max-w-5xl relative z-10">
-        {/* Project Navigation - Left/Right arrows */}
-        <button 
-          onClick={prevProject} 
-          className="absolute left-8 md:left-16 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border shadow hover:bg-gray-100 transition-colors"
-          aria-label="Previous Project"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-sm">
+            My Projects
+          </h1>
+          <p className="text-lg text-white/80 font-light tracking-wide">
+            Showcasing my development journey and technical achievements
+          </p>
+        </div>
 
-        <button 
-          onClick={nextProject} 
-          className="absolute right-8 md:right-16 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border shadow hover:bg-gray-100 transition-colors"
-          aria-label="Next Project"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        {/* Project Navigation Container - Outside project card but at image height */}
+        <div className="relative">
+          {/* Project Navigation Arrows - Outside project grid, at image middle height */}
+          <button 
+            onClick={prevProject} 
+            className="absolute -left-20 top-[250px] transform -translate-y-1/2 z-30 group p-4 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-xl hover:shadow-emerald-500/20"
+            aria-label="Previous Project"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 via-transparent to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <svg className="w-6 h-6 text-white/90 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button 
+            onClick={nextProject} 
+            className="absolute -right-20 top-[250px] transform -translate-y-1/2 z-30 group p-4 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-xl hover:shadow-emerald-500/20"
+            aria-label="Next Project"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 via-transparent to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <svg className="w-6 h-6 text-white/90 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
 
         {/* Card */}
-        <div className="mt-6 rounded-2xl overflow-hidden border bg-white/80 shadow">
+        <div className="mt-6 group relative rounded-3xl overflow-hidden border border-white/20 bg-white/10 backdrop-blur-xl shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500">
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           {/* Image top with carousel */}
-          <div className="w-full h-[500px] bg-gray-50 relative overflow-hidden">
+          <div className="relative w-full h-[500px] bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border-b border-white/20 overflow-hidden">
             {/* Image carousel */}
             {p.images && p.images.length > 0 ? (
               <div className="w-full h-full relative">
                 {/* Special layout for STYRA - show 2 images side by side */}
                 {p.id === 2 ? (
-                  <div className="w-full h-full grid grid-cols-2 gap-4 p-6">
+                  <div className="w-full h-full grid grid-cols-2 gap-6 p-8">
                     {/* Left image */}
-                    <div className="flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
-                        src={p.images[currentImageIndex]} 
-                        alt={`${p.title} screenshot ${currentImageIndex + 1}`} 
-                        className="max-w-full max-h-[450px] object-contain shadow-xl rounded-lg" 
-                      />
+                    <div className="flex items-center justify-center group">
+                      <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 hover:scale-105 border border-white/20 backdrop-blur-sm">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img 
+                          src={p.images[currentImageIndex]} 
+                          alt={`${p.title} screenshot ${currentImageIndex + 1}`} 
+                          className="max-w-full max-h-[420px] object-contain" 
+                        />
+                      </div>
                     </div>
                     {/* Right image */}
-                    <div className="flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
-                        src={p.images[currentImageIndex + 1] || p.images[0]} 
-                        alt={`${p.title} screenshot ${(currentImageIndex + 1) % p.images.length + 1}`} 
-                        className="max-w-full max-h-[450px] object-contain shadow-xl rounded-lg" 
-                      />
+                    <div className="flex items-center justify-center group">
+                      <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 hover:scale-105 border border-white/20 backdrop-blur-sm">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img 
+                          src={p.images[currentImageIndex + 1] || p.images[0]} 
+                          alt={`${p.title} screenshot ${(currentImageIndex + 1) % p.images.length + 1}`} 
+                          className="max-w-full max-h-[420px] object-contain" 
+                        />
+                      </div>
                     </div>
                   </div>
                 ) : (
                   /* Regular single image layout for other projects */
-                  <div className="w-full h-full flex items-center justify-center p-6">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
-                      src={p.images[currentImageIndex]} 
-                      alt={`${p.title} screenshot ${currentImageIndex + 1}`} 
-                      className="max-w-full max-h-[450px] object-contain shadow-xl rounded-lg" 
-                    />
+                  <div className="w-full h-full flex items-center justify-center p-8">
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 hover:scale-105 border border-white/20 backdrop-blur-sm group">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src={p.images[currentImageIndex]} 
+                        alt={`${p.title} screenshot ${currentImageIndex + 1}`} 
+                        className="max-w-full max-h-[420px] object-contain" 
+                      />
+                    </div>
                   </div>
                 )}
-                
-                {/* Image counter */}
-                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-2 rounded-full text-sm font-medium">
-                  {p.id === 2 ? 
-                    `${Math.floor(currentImageIndex / 2) + 1} / ${Math.ceil(p.images.length / 2)}` :
-                    `${currentImageIndex + 1} / ${p.images.length}`
-                  }
-                </div>
                 
                 {/* Image navigation arrows */}
                 {((p.id === 2 && p.images.length > 2) || (p.id !== 2 && p.images.length > 1)) && (
                   <>
                     <button 
                       onClick={prevImage}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors shadow-lg"
+                      className="absolute left-1/4 bottom-4 transform -translate-x-1/2 group p-3 rounded-2xl bg-black/20 border border-white/20 backdrop-blur-xl hover:bg-black/40 text-white/90 transition-all duration-300 shadow-xl hover:shadow-emerald-500/20 hover:scale-110"
                       aria-label="Previous Image"
                     >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 via-transparent to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
                     </button>
                     <button 
                       onClick={nextImage}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors shadow-lg"
+                      className="absolute right-1/4 bottom-4 transform translate-x-1/2 group p-3 rounded-2xl bg-black/20 border border-white/20 backdrop-blur-xl hover:bg-black/40 text-white/90 transition-all duration-300 shadow-xl hover:shadow-emerald-500/20 hover:scale-110"
                       aria-label="Next Image"
                     >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 via-transparent to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
@@ -295,75 +310,161 @@ export default function ProjectsPage() {
                 )}
               </div>
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white bg-gradient-to-br from-blue-500 to-purple-600">
-                No Screenshots Available
+              <div className="w-full h-full flex items-center justify-center text-white/90 bg-gradient-to-br from-blue-500/20 to-purple-600/20 backdrop-blur-sm">
+                <div className="text-center p-8">
+                  <div className="text-6xl mb-4 opacity-50">📷</div>
+                  <div className="text-xl font-medium">No Screenshots Available</div>
+                </div>
               </div>
             )}
           </div>
 
           {/* Content */}
-          <div className="p-6">
-            <h3 className="text-xl font-bold text-blue-600 mb-1">{p.title}</h3>
-            {p.subtitle && <p className="text-gray-600 mb-3">{p.subtitle}</p>}
-            {p.role && <div className="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-800 text-sm mb-4">{p.role}</div>}
+          <div className="relative z-10 p-8 space-y-6">
+            {/* Title and subtitle */}
+            <div className="space-y-2">
+              <h3 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                {p.title}
+              </h3>
+              {p.subtitle && (
+                <p className="text-white/70 text-lg font-light">{p.subtitle}</p>
+              )}
+              {p.role && (
+                <div className="inline-block px-4 py-2 rounded-2xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 backdrop-blur-sm text-purple-200 text-sm font-medium shadow-lg">
+                  {p.role}
+                </div>
+              )}
+            </div>
 
             {p.description && (
-              <div className="mb-4">
-                <h4 className="font-semibold">Description</h4>
-                <p className="text-sm text-gray-700 mt-1">{p.description}</p>
-              </div>
-            )}
-
-            {p.responsibilities && (
-              <div className="mb-4">
-                <h4 className="font-semibold">Responsibilities</h4>
-                <ul className="list-disc list-inside text-sm text-gray-700 mt-1 space-y-1">
-                  {p.responsibilities.map((r, i) => (
-                    <li key={i}>{r}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {p.technologies && (
-              <div className="mb-4">
-                <h4 className="font-semibold">Stack</h4>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {p.technologies.map((t, i) => (
-                    <span key={i} className="px-3 py-1 rounded-full text-xs bg-blue-100 text-blue-800">{t}</span>
-                  ))}
+              <div className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/8 transition-all duration-300 shadow-lg">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <h4 className="font-bold text-lg text-white/90 mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-3"></span>
+                    Description
+                  </h4>
+                  <p className="text-white/80 leading-relaxed">{p.description}</p>
                 </div>
               </div>
             )}
 
-            <div className="flex gap-3 mt-4">
+            {p.responsibilities && (
+              <div className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/8 transition-all duration-300 shadow-lg">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400/5 via-transparent to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <h4 className="font-bold text-lg text-white/90 mb-4 flex items-center">
+                    <span className="w-2 h-2 bg-gradient-to-r from-blue-400 to-emerald-400 rounded-full mr-3"></span>
+                    Key Responsibilities
+                  </h4>
+                  <ul className="space-y-3">
+                    {p.responsibilities.map((r, i) => (
+                      <li key={i} className="flex items-start text-white/80">
+                        <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2.5 mr-3 flex-shrink-0"></span>
+                        <span className="leading-relaxed">{r}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            {p.technologies && (
+              <div className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/8 transition-all duration-300 shadow-lg">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <h4 className="font-bold text-lg text-white/90 mb-4 flex items-center">
+                    <span className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mr-3"></span>
+                    Technology Stack
+                  </h4>
+                  <div className="flex flex-wrap gap-3">
+                    {p.technologies.map((t, i) => (
+                      <span 
+                        key={i} 
+                        className="group/tech relative px-4 py-2 rounded-xl bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-sm font-medium hover:bg-white/15 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-400/20"
+                      >
+                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400/10 to-blue-400/10 opacity-0 group-hover/tech:opacity-100 transition-opacity duration-300"></div>
+                        <span className="relative z-10">{t}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Action buttons */}
+            <div className="flex gap-4 pt-4">
               {p.demoLink ? (
-                <a href={p.demoLink} target="_blank" rel="noreferrer" className="flex-1 text-center px-4 py-2 rounded bg-blue-600 text-white">Live Project</a>
+                <a 
+                  href={p.demoLink} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="group relative flex-1 text-center px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500/80 to-cyan-500/80 border border-emerald-400/30 backdrop-blur-sm text-white font-semibold hover:from-emerald-500 hover:to-cyan-500 transition-all duration-300 shadow-xl hover:shadow-emerald-500/30 hover:scale-105"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <span className="relative z-10 flex items-center justify-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Live Project
+                  </span>
+                </a>
               ) : (
-                <button className="flex-1 px-4 py-2 rounded bg-gray-200 text-gray-600" disabled>Live Project</button>
+                <button className="flex-1 px-6 py-3 rounded-2xl bg-white/5 border border-white/20 backdrop-blur-sm text-white/50 font-semibold cursor-not-allowed" disabled>
+                  Live Project
+                </button>
               )}
 
               {p.id === 1 ? (
-                <div className="px-4 py-2 text-gray-500">Repo link is private</div>
+                <div className="px-6 py-3 text-white/60 font-medium flex items-center">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  Private Repository
+                </div>
               ) : p.githubLink ? (
-                <a href={p.githubLink} target="_blank" rel="noreferrer" className="px-4 py-2 rounded border text-gray-700">Source Code</a>
+                <a 
+                  href={p.githubLink} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="group relative px-6 py-3 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 font-semibold hover:bg-white/15 transition-all duration-300 shadow-lg hover:shadow-white/20 hover:scale-105"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <span className="relative z-10 flex items-center justify-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    Source Code
+                  </span>
+                </a>
               ) : (
-                <button className="px-4 py-2 rounded border text-gray-400" disabled>Source Code</button>
+                <button className="px-6 py-3 rounded-2xl bg-white/5 border border-white/20 backdrop-blur-sm text-white/50 font-semibold cursor-not-allowed" disabled>
+                  Source Code
+                </button>
               )}
             </div>
           </div>
         </div>
 
         {/* Project Navigation Dots */}
-        <div className="flex justify-center gap-2 mt-4">
+        <div className="flex justify-center gap-3 mt-8">
           {projects.map((_, i) => (
             <button 
               key={i} 
               onClick={() => goToProject(i)} 
-              className={`${i === currentProjectIndex ? 'w-3 h-3 bg-blue-400 scale-110' : 'w-3 h-3 bg-gray-400'} rounded-full transition`}
+              className={`group relative transition-all duration-300 hover:scale-125 ${
+                i === currentProjectIndex 
+                  ? 'w-12 h-4 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full shadow-lg shadow-emerald-400/30' 
+                  : 'w-4 h-4 bg-white/30 border border-white/40 backdrop-blur-sm rounded-full hover:bg-white/50'
+              }`}
               aria-label={`Go to project ${i + 1}`}
-            />
+            >
+              {i !== currentProjectIndex && (
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              )}
+            </button>
           ))}
+        </div>
         </div>
       </div>
     </section>
