@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,42 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState('')
   const [currentImageIndex, setCurrentImageIndex] = useState<{[key: number]: number}>({})
+  const [activeSection, setActiveSection] = useState('home')
+
+  // Smooth scroll function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'education', 'skills', 'projects', 'contact']
+      const scrollPosition = window.scrollY + 100
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Call once to set initial state
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const nextImage = (projectId: number, totalImages: number) => {
     setCurrentImageIndex(prev => ({
@@ -64,46 +100,57 @@ export default function Home() {
   }
 
   const skillCategories = {
+    // Technical Skills - Part 1
     "Programming Languages": [
       { name: "C", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
-      { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" }
+      { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+     
     ],
     "Web Development": [
       { name: "HTML", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
       { name: "CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-      { name: "Tailwind", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
       { name: "Three.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
-      { name: "Javascript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "Node", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
       { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+       { name: "Javascript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+      { name: "Tailwind", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
       { name: "Socket.io", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
-      { name: "Ballerina", logo:"https://ballerina.io/img/branding/ballerina_logo_dgrey_png.png"},
-      { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" }
+      { name: "Ballerina", logo:"https://ballerina.io/img/branding/ballerina_logo_dgrey_png.png"}
     ],
     "Database": [
       { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-      { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" }
     ],
     "Mobile App Development": [
-      { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    ],
+      { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" }
+    ]
+  }
+
+  const toolsAndPlatforms = {
+    // Tools & Platforms - Part 2
     "Version Control": [
       { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-      { name: "Github", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Github", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" }
     ],
     "Project Management Tools": [
       { name: "Jira", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" }
     ],
     "UI/UX Designs": [
-      { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+      { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" }
     ],
     "Containerization": [
-      { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" }
     ],
+    "Graphic Design": [
+      { name: "Adobe Lightroom Pro", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
+      { name: "GIMP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gimp/gimp-original.svg" },
+      { name: "Canva", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" }
+    ]
   }
 
   const projects = [
@@ -181,6 +228,78 @@ export default function Home() {
       
       {/* Subtle gray gradient overlay to add depth */}
       <div className="fixed inset-0 bg-gradient-to-br from-gray-800/8 via-transparent to-black/20" />
+      
+      {/* Floating Navigation */}
+      <nav className="fixed top-6 right-6 z-50 flex flex-col space-y-3">
+        {[
+          { 
+            id: 'home', 
+            label: 'Home',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              </svg>
+            )
+          },
+          { 
+            id: 'education', 
+            label: 'Education',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+              </svg>
+            )
+          },
+          { 
+            id: 'skills', 
+            label: 'Skills',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+              </svg>
+            )
+          },
+          { 
+            id: 'projects', 
+            label: 'Projects',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
+              </svg>
+            )
+          },
+          { 
+            id: 'contact', 
+            label: 'Contact',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            )
+          }
+        ].map((item) => (
+          <button
+            key={item.id}
+            onClick={() => scrollToSection(item.id)}
+            className={`group relative w-9 h-9 rounded-full border flex items-center justify-center text-sm font-medium transition-all duration-300 hover:scale-110 ${
+              activeSection === item.id
+                ? 'border-[var(--accent)] bg-[var(--accent)]/30 text-[var(--light-accent)] shadow-lg shadow-[var(--accent)]/25'
+                : 'border-[var(--accent)] text-[var(--light-accent)] hover:bg-[var(--accent)]/20'
+            }`}
+            suppressHydrationWarning
+          >
+            <span className="transition-transform duration-300 group-hover:scale-110">
+              {item.icon}
+            </span>
+            
+            {/* Tooltip */}
+            <div className="absolute right-full mr-3 px-3 py-1 bg-black/80 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+              {item.label}
+              <div className="absolute top-1/2 left-full w-0 h-0 border-l-4 border-l-black/80 border-t-2 border-b-2 border-t-transparent border-b-transparent transform -translate-y-1/2"></div>
+            </div>
+          </button>
+        ))}
+      </nav>
       
       <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 py-12 relative z-10">
 
@@ -330,20 +449,206 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid gap-8">
-            {Object.entries(skillCategories).map(([category, skills]) => (
-              <div key={category} className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 shadow-2xl">
-                <h3 className="text-2xl font-bold mb-6 text-white/90">{category}</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                  {skills.map((skill) => (
-                    <div key={skill.name} className="flex flex-col items-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                      <img src={skill.logo} alt={skill.name} className="w-12 h-12 mb-2" />
-                      <span className="text-sm text-white/80 text-center">{skill.name}</span>
-                    </div>
-                  ))}
+          {/* Technical Skills Section - Part 1 */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                Technical Skills
+              </h3>
+              <p className="text-white/70">Core programming and development technologies</p>
+            </div>
+            
+            {/* Technical Skills Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              
+              {/* Programming Languages */}
+              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 space-y-4">
+                  <div className="text-center">
+                    <h4 className="text-lg lg:text-xl font-bold text-white mb-1">
+                      <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                        Programming Languages
+                      </span>
+                    </h4>
+                    <div className="w-14 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto rounded-full"></div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {skillCategories["Programming Languages"].map((skill, idx) => (
+                      <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
+                          <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        </div>
+                        <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            ))}
+
+              {/* Web Development */}
+              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-blue-400/30 shadow-xl hover:shadow-blue-500/10 lg:col-span-2 xl:col-span-2">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/5 via-transparent to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 space-y-6">
+                  <div className="text-center">
+                    <h4 className="text-xl lg:text-2xl font-bold text-white mb-2">
+                      <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+                        Web Development
+                      </span>
+                    </h4>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-emerald-400 mx-auto rounded-full"></div>
+                  </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-4">
+                    {skillCategories["Web Development"].map((skill, idx) => {
+                      const isBallerina = skill.name && skill.name.toLowerCase() === 'ballerina'
+                      return (
+                        <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-xl backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                          <div className={"bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 " + (isBallerina ? 'w-14 h-14' : 'w-12 h-12')}>
+                            <img
+                              src={skill.logo}
+                              alt={skill.name}
+                              className={(isBallerina ? 'w-10 h-10' : 'w-8 h-8') + ' object-contain'}
+                              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                            />
+                          </div>
+                          <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Database */}
+              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-cyan-400/30 shadow-xl hover:shadow-cyan-500/10">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 space-y-4">
+                  <div className="text-center">
+                    <h4 className="text-lg lg:text-xl font-bold text-white mb-1">
+                      <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                        Database
+                      </span>
+                    </h4>
+                    <div className="w-14 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto rounded-full"></div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {skillCategories["Database"].map((skill, idx) => (
+                      <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
+                          <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        </div>
+                        <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile App Development */}
+              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 space-y-4">
+                  <div className="text-center">
+                    <h4 className="text-lg lg:text-xl font-bold text-white mb-1">
+                      <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                        Mobile App Development
+                      </span>
+                    </h4>
+                    <div className="w-14 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto rounded-full"></div>
+                  </div>
+                  <div className="flex justify-center">
+                    {skillCategories["Mobile App Development"].map((skill, idx) => (
+                      <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
+                          <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        </div>
+                        <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tools & Platforms Section - Part 2 */}
+          <div>
+            <div className="text-center mb-12">
+              <h3 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Tools & Platforms
+              </h3>
+              <p className="text-white/70">Development tools and collaboration platforms</p>
+            </div>
+            
+            {/* Tools & Platforms Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Object.entries(toolsAndPlatforms).map(([category, tools]) => (
+                <div key={category} className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-purple-400/30 shadow-xl hover:shadow-purple-500/10">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10 space-y-4">
+                    <div className="text-center">
+                      <h4 className="text-lg font-bold text-white mb-1">
+                        <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                          {category}
+                        </span>
+                      </h4>
+                      <div className="w-12 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 mx-auto rounded-full"></div>
+                    </div>
+                    <div className={`grid gap-3 ${tools.length === 1 ? 'justify-center flex' : tools.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                      {tools.map((tool, idx) => (
+                        <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                          <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
+                            <img src={tool.logo} alt={tool.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                          </div>
+                          <div className="text-sm font-semibold text-white/90 text-center leading-tight">{tool.name}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Skills Summary */}
+          <div className="mt-16 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-emerald-400/30 shadow-xl hover:shadow-emerald-500/10">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/5 via-transparent to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 text-3xl font-bold text-emerald-400 mb-2">5</div>
+                <div className="relative z-10 text-sm text-white/70 font-medium">
+                  Programming Languages
+                </div>
+              </div>
+              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-cyan-400/30 shadow-xl hover:shadow-cyan-500/10">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 text-3xl font-bold text-cyan-400 mb-2">10</div>
+                <div className="relative z-10 text-sm text-white/70 font-medium">
+                  Web Technologies
+                </div>
+              </div>
+              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-blue-400/30 shadow-xl hover:shadow-blue-500/10">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400/5 via-transparent to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 text-3xl font-bold text-blue-400 mb-2">3</div>
+                <div className="relative z-10 text-sm text-white/70 font-medium">
+                  Database Systems
+                </div>
+              </div>
+              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-purple-400/30 shadow-xl hover:shadow-purple-500/10">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-400/5 via-transparent to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 text-3xl font-bold text-purple-400 mb-2">1</div>
+                <div className="relative z-10 text-sm text-white/70 font-medium">
+                  Mobile Development
+                </div>
+              </div>
+              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-pink-400/30 shadow-xl hover:shadow-pink-500/10">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-400/5 via-transparent to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 text-3xl font-bold text-pink-400 mb-2">8</div>
+                <div className="relative z-10 text-sm text-white/70 font-medium">
+                  Development Tools
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
