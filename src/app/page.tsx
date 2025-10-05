@@ -3,11 +3,34 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function Home() {
-  // Add smooth scrolling behavior
+  // Add smooth scrolling behavior and force mobile visibility
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth'
+    
+    // Force show projects on mobile after 1 second
+    const mobileShowTimer = setTimeout(() => {
+      if (window.innerWidth <= 768) {
+        const projectsSection = document.getElementById('projects')
+        if (projectsSection) {
+          projectsSection.style.opacity = '1'
+          projectsSection.style.transform = 'translateY(0)'
+          projectsSection.classList.add('visible')
+          
+          // Force show all project cards
+          const projectCards = projectsSection.querySelectorAll('.animate-slide-up-delay')
+          projectCards.forEach((card) => {
+            const htmlCard = card as HTMLElement
+            htmlCard.style.opacity = '1'
+            htmlCard.style.transform = 'translateY(0)'
+            htmlCard.classList.add('visible')
+          })
+        }
+      }
+    }, 1000)
+    
     return () => {
       document.documentElement.style.scrollBehavior = 'auto'
+      clearTimeout(mobileShowTimer)
     }
   }, [])
 
@@ -27,7 +50,7 @@ export default function Home() {
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
+      rootMargin: '0px 0px -50px 0px' // Reduced margin for better mobile triggering
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -41,8 +64,10 @@ export default function Home() {
           
           // Add visible class to child elements with animation classes
           const animatedElements = entry.target.querySelectorAll('.animate-slide-up, .animate-slide-up-delay')
-          animatedElements.forEach(el => {
-            el.classList.add('visible')
+          animatedElements.forEach((el, index) => {
+            setTimeout(() => {
+              el.classList.add('visible')
+            }, index * 100) // Staggered animation
           })
         }
       })
@@ -52,7 +77,25 @@ export default function Home() {
     const sections = document.querySelectorAll('section[id]')
     sections.forEach(section => observer.observe(section))
 
-    return () => observer.disconnect()
+    // Fallback for mobile devices - ensure projects are visible after 2 seconds
+    const fallbackTimer = setTimeout(() => {
+      const projectsSection = document.getElementById('projects')
+      if (projectsSection && !visibleSections.has('projects')) {
+        setVisibleSections(prev => new Set([...prev, 'projects']))
+        projectsSection.classList.add('visible')
+        const animatedElements = projectsSection.querySelectorAll('.animate-slide-up, .animate-slide-up-delay')
+        animatedElements.forEach((el, index) => {
+          setTimeout(() => {
+            el.classList.add('visible')
+          }, index * 100)
+        })
+      }
+    }, 2000)
+
+    return () => {
+      observer.disconnect()
+      clearTimeout(fallbackTimer)
+    }
   }, [])
 
   // Smooth scroll function
@@ -462,16 +505,40 @@ export default function Home() {
         /* Ensure sections start hidden except home */
         section:not(#home) {
           opacity: 0;
-          transform: translateY(50px);
-          transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+          transform: translateY(30px); /* Reduced for mobile */
+          transition: opacity 1s ease-out, transform 1s ease-out;
         }
-        
+
         section:not(#home).visible {
           opacity: 1;
           transform: translateY(0);
         }
         
-        .stagger-1 { transition-delay: 0.2s; }
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+          section:not(#home) {
+            transform: translateY(20px); /* Even smaller offset for mobile */
+          }
+          
+          .animate-slide-up {
+            transform: translateY(20px);
+          }
+          
+          .animate-slide-up-delay {
+            transform: translateY(15px);
+          }
+          
+          /* Ensure projects are always visible on mobile */
+          #projects {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+          }
+          
+          #projects .animate-slide-up-delay {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+          }
+        }        .stagger-1 { transition-delay: 0.2s; }
         .stagger-2 { transition-delay: 0.4s; }
         .stagger-3 { transition-delay: 0.6s; }
         .stagger-4 { transition-delay: 0.8s; }
@@ -944,7 +1011,7 @@ export default function Home() {
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="projects" className={`min-h-screen py-16 animate-slide-up ${visibleSections.has('projects') ? 'visible' : ''}`}>
+        <section id="projects" className={`min-h-screen py-16 px-4 md:px-0 animate-slide-up ${visibleSections.has('projects') ? 'visible' : ''}`}>
           <div className={`mb-16 text-center animate-slide-up-delay stagger-1 ${visibleSections.has('projects') ? 'visible' : ''}`}>
             <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Featured Projects
@@ -954,10 +1021,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid gap-12">
+          <div className="grid gap-8 md:gap-12">
             {projects.map((project, index) => (
-              <div key={project.id} className={`relative p-8 transition-all duration-500 border shadow-2xl group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 animate-slide-up-delay stagger-${Math.min(index + 2, 5)} ${visibleSections.has('projects') ? 'visible' : ''}`}>
-                <div className="grid gap-10 lg:grid-cols-2">
+              <div key={project.id} className={`relative p-4 md:p-8 transition-all duration-500 border shadow-2xl group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 animate-slide-up-delay stagger-${Math.min(index + 2, 5)} ${visibleSections.has('projects') ? 'visible' : ''}`}>
+                <div className="grid gap-6 md:gap-10 lg:grid-cols-2">
                   {/* Project Info */}
                   <div className="space-y-6">
                     <div>
@@ -1045,7 +1112,7 @@ export default function Home() {
                   <div className="relative">
                     {project.type === "Mobile Application" ? (
                       /* Mobile App Frame */
-                      <div className="relative mx-auto w-72 h-[550px]">
+                      <div className="relative mx-auto w-64 h-[500px] sm:w-72 sm:h-[550px]">
                         {/* Phone Frame */}
                         <div className="relative w-full h-full bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
                           <div className="w-full h-full bg-black rounded-[2rem] overflow-hidden relative">
