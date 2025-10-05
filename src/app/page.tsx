@@ -222,7 +222,7 @@ export default function Home() {
     <main className="min-h-screen text-[var(--text)] relative">
       {/* Background image with dark gray overlay - Fixed to viewport */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+        className="fixed inset-0 bg-fixed bg-center bg-no-repeat bg-cover"
         style={{ backgroundImage: 'url(/background.jpg)' }}
       />
       <div className="fixed inset-0 bg-black/50 backdrop-blur-[1.5px]" />
@@ -231,7 +231,7 @@ export default function Home() {
       <div className="fixed inset-0 bg-gradient-to-br from-gray-800/8 via-transparent to-black/20" />
       
       {/* Floating Navigation */}
-      <nav className="fixed top-6 right-6 z-50 flex flex-col space-y-3">
+      <nav className="fixed z-50 flex flex-col space-y-3 top-6 right-6">
         {[
           { 
             id: 'home', 
@@ -294,25 +294,25 @@ export default function Home() {
             </span>
             
             {/* Tooltip */}
-            <div className="absolute right-full mr-3 px-3 py-1 bg-black/80 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+            <div className="absolute px-3 py-1 mr-3 text-sm text-white transition-opacity duration-300 rounded-lg opacity-0 pointer-events-none right-full bg-black/80 group-hover:opacity-100 whitespace-nowrap">
               {item.label}
-              <div className="absolute top-1/2 left-full w-0 h-0 border-l-4 border-l-black/80 border-t-2 border-b-2 border-t-transparent border-b-transparent transform -translate-y-1/2"></div>
+              <div className="absolute w-0 h-0 transform -translate-y-1/2 border-t-2 border-b-2 border-l-4 top-1/2 left-full border-l-black/80 border-t-transparent border-b-transparent"></div>
             </div>
           </button>
         ))}
       </nav>
       
-      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 py-12 relative z-10 font-sans">
+      <div className="container relative z-10 px-6 py-12 mx-auto font-sans sm:px-8 md:px-12 lg:px-24 xl:px-32">
 
         {/* HOME SECTION */}
-        <section id="home" className="grid grid-cols-1 lg:grid-cols-2 items-start gap-8 pt-6 pb-12 min-h-screen">
+        <section id="home" className="grid items-start min-h-screen grid-cols-1 gap-8 pt-6 pb-12 lg:grid-cols-2">
           {/* Left content */}
-          <div className="space-y-6 max-w-xl">
-            <div className="text-lg font-semibold bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Hey there,</div>
+          <div className="max-w-xl space-y-6">
+            <div className="text-lg font-semibold text-transparent bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text">Hey there,</div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-             <p className="font-libre"> I Am </p><span className="bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent font-libre">Sachini Kalansooriya</span>
-              <span className="inline-block w-1 ml-2 h-12 align-middle bg-purple-400 animate-blink" />
+            <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+             <p className="font-libre"> I Am </p><span className="text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-300 bg-clip-text font-libre">Sachini Kalansooriya</span>
+              <span className="inline-block w-1 h-12 ml-2 align-middle bg-purple-400 animate-blink" />
             </h1>
 
             <p className="text-[var(--text-muted)] text-base">
@@ -324,8 +324,8 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mt-6">
-              <a href="/resume.pdf" download className="inline-flex items-center px-5 py-3 bg-purple-600/20 backdrop-blur-md border border-purple-500/60 hover:bg-purple-600/30 text-white rounded-md font-medium shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group">
-                <span className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></span>
+              <a href="/SachiniKalansooriyaCV.pdf" download className="relative inline-flex items-center px-5 py-3 overflow-hidden font-medium text-white transition-all duration-300 transform border rounded-md shadow-lg bg-purple-600/20 backdrop-blur-md border-purple-500/60 hover:bg-purple-600/30 hover:shadow-purple-500/25 hover:scale-105 group">
+                <span className="absolute inset-0 transition-all duration-700 transform -translate-x-full opacity-0 bg-gradient-to-r from-white/10 via-white/20 to-transparent group-hover:opacity-100 group-hover:translate-x-full"></span>
                 <span className="relative">Download CV</span>
               </a>
               <a href="#contact" className="inline-flex items-center px-5 py-3 border border-purple-500/60 bg-purple-500/10 backdrop-blur-md text-[var(--text)] rounded-md hover:bg-purple-500/20 hover:border-purple-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">Let&apos;s talk</a>
@@ -333,8 +333,8 @@ export default function Home() {
 
             <div className="flex items-center gap-4 mt-4">
               {/* social icons (simple circles) */}
-              <a className="w-9 h-9 rounded-full border border-purple-500/60 bg-purple-500/10 backdrop-blur-md flex items-center justify-center text-purple-400 hover:bg-purple-500/20 hover:border-purple-500 shadow-lg hover:shadow-purple-500/25 transition-all duration-300" href="https://www.linkedin.com/in/sachini-kalansooriya/" aria-label="linkedin">in</a>
-              <a className="w-9 h-9 rounded-full border border-purple-500/60 bg-purple-500/10 backdrop-blur-md flex items-center justify-center text-purple-400 hover:bg-purple-500/20 hover:border-purple-500 shadow-lg hover:shadow-purple-500/25 transition-all duration-300" href="https://github.com/SachiniKalansooriya" target="_blank" rel="noreferrer" aria-label="github">
+              <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://www.linkedin.com/in/sachini-kalansooriya/" aria-label="linkedin">in</a>
+              <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://github.com/SachiniKalansooriya" target="_blank" rel="noreferrer" aria-label="github">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.835 2.805 1.305 3.49.997.108-.775.418-1.305.76-1.605-2.665-.3-5.467-1.335-5.467-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.096.81 2.21 0 1.595-.015 2.88-.015 3.27 0 .32.21.694.825.576C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z" />
                 </svg>
@@ -342,65 +342,65 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right portrait with circular backdrop */}
-          <div className="flex justify-center lg:justify-end relative">
+                    {/* Right portrait with circular backdrop */}
+          <div className="relative flex justify-center lg:justify-end">
                 <div className="relative w-96 h-96 md:w-[36rem] md:h-[36rem] flex items-center justify-center">
                 {/* big circular backdrop (larger) */}
-                <div className="absolute w-96 h-96 md:w-[36rem] md:h-[36rem] rounded-full bg-[var(--surface)]/20 -right-4 -top-6" />
+                <div className="absolute w-96 h-96 md:w-[36rem] md:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 -right-4 -top-6" />
 
                 {/* portrait (increased size) */}
-                <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-gray-500 shadow-2xl">
-                  <Image src="/propic.png" alt="Profile" className="w-full h-full object-cover" width={384} height={384} />
+                <div className="relative overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl w-72 h-72 md:w-96 md:h-96">
+                  <Image src="/propic.png" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
                 </div>
             </div>
           </div>
         </section>
 
         {/* EDUCATION SECTION */}
-        <section id="education" className="py-16 min-h-screen">
+        <section id="education" className="min-h-screen py-16">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm font-title">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Education
             </h2>
-            <p className="text-lg text-purple-400 tracking-wide font-satisfy">
+            <p className="text-lg tracking-wide text-purple-400 font-satisfy">
               My academic journey and achievements
             </p>
           </div>
 
           {/* Main Grid - University and A-Level */}
-          <div className="grid lg:grid-cols-2 gap-10 mb-12">
+          <div className="grid gap-10 mb-12 lg:grid-cols-2">
             
             {/* University Education Card */}
             <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-[1.02] hover:border-purple-500/30 shadow-2xl hover:shadow-purple-500/10">
               
               {/* Subtle glow effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-purple-500/5 via-transparent to-blue-600/5 group-hover:opacity-100"></div>
               
               {/* University Header */}
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-8">
                   <div className="flex-1">
-                    <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-purple-300 leading-tight">
+                    <h3 className="mb-4 text-2xl font-bold leading-tight text-purple-300 lg:text-3xl">
                       B.Sc. (Hons) Degree in<br/>
-                      <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                      <span className="text-transparent bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text">
                         Information Technology
                       </span>
                     </h3>
-                    <div className="space-y-2 mb-4">
+                    <div className="mb-4 space-y-2">
                       <p className="text-lg font-semibold text-purple-500">
                         CGPA: 3.37
                       </p>
                       <p className="text-xl font-bold text-purple-300">
                         University of Moratuwa
                       </p>
-                      <p className="text-white/70 font-medium">
+                      <p className="font-medium text-white/70">
                         Sri Lanka
                       </p>
                     </div>
                   </div>
-                  <div className="text-right ml-4">
-                    <div className="px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-500/20 to-blue-600/20 text-purple-400 border border-purple-500/30 backdrop-blur-sm">
+                  <div className="ml-4 text-right">
+                    <div className="px-4 py-2 text-sm font-semibold text-purple-400 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-500/30 backdrop-blur-sm">
                       2023 - present
                     </div>
                   </div>
@@ -412,28 +412,28 @@ export default function Home() {
             <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-[1.02] hover:border-blue-600/30 shadow-2xl hover:shadow-blue-600/10">
               
               {/* Subtle glow effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5 group-hover:opacity-100"></div>
               
               {/* A-Level Header */}
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-8">
                   <div className="flex-1">
-                    <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-blue-300 leading-tight">
-                      <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                    <h3 className="mb-4 text-2xl font-bold leading-tight text-blue-300 lg:text-3xl">
+                      <span className="text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text">
                         GCE Advanced Level
                       </span>
-                      <span className="block text-xl font-semibold text-blue-500 mt-2">
+                      <span className="block mt-2 text-xl font-semibold text-blue-500">
                         Z-score: 1.7953 (Maths Stream)
                       </span>
                     </h3>
-                    <div className="space-y-2 mb-4">
+                    <div className="mb-4 space-y-2">
                       <p className="text-lg font-semibold text-blue-300">
                         Anuladevi Balika Vidyalaya
                       </p>
                     </div>
                   </div>
-                  <div className="text-right ml-4">
-                    <div className="px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-500/20 to-blue-600/20 text-purple-400 border border-purple-500/30 backdrop-blur-sm">
+                  <div className="ml-4 text-right">
+                    <div className="px-4 py-2 text-sm font-semibold text-purple-400 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-500/30 backdrop-blur-sm">
                       2021
                     </div>
                   </div>
@@ -444,35 +444,35 @@ export default function Home() {
         </section>
 
         {/* SKILLS SECTION */}
-        <section id="skills" className="py-16 min-h-screen">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm font-title">
+        <section id="skills" className="min-h-screen py-16">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Skills & Technologies
             </h2>
-            <p className="text-lg text-purple-400 tracking-wide font-satisfy">
+            <p className="text-lg tracking-wide text-purple-400 font-satisfy">
               Technologies I work with
             </p>
           </div>
 
           {/* Technical Skills Section - Part 1 */}
           <div className="mb-16">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent font-title">
+            <div className="mb-12 text-center">
+              <h3 className="mb-4 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text font-title">
                 Technical Skills
               </h3>
               <p className="text-purple-300 font-satisfy">Core programming and development technologies</p>
             </div>
             
             {/* Technical Skills Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
               
               {/* Programming Languages */}
-              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-purple-500/30 shadow-xl hover:shadow-purple-500/10">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group bg-white/5 border-white/10 rounded-3xl backdrop-blur-xl hover:bg-white/8 hover:border-purple-500/30 hover:shadow-purple-500/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-purple-500/5 via-transparent to-blue-600/5 group-hover:opacity-100"></div>
                 <div className="relative z-10 space-y-4">
                   <div className="text-center">
-                    <h4 className="text-lg lg:text-xl font-bold text-white mb-1">
-                      <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+                    <h4 className="mb-1 text-lg font-bold text-white lg:text-xl">
+                      <span className="text-transparent bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text">
                         Programming Languages
                       </span>
                     </h4>
@@ -480,11 +480,11 @@ export default function Home() {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {skillCategories["Programming Languages"].map((skill, idx) => (
-                      <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
-                        <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
-                          <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      <div key={idx} className="flex flex-col items-center p-3 transition-all duration-300 border rounded-lg bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 hover:scale-105">
+                        <div className="flex items-center justify-center w-12 h-12 p-2 mb-2 rounded-lg bg-white/20">
+                          <img src={skill.logo} alt={skill.name} className="object-contain w-8 h-8" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                         </div>
-                        <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                        <div className="text-sm font-semibold text-center text-white/90">{skill.name}</div>
                       </div>
                     ))}
                   </div>
@@ -492,22 +492,22 @@ export default function Home() {
               </div>
 
               {/* Web Development */}
-              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-blue-600/30 shadow-xl hover:shadow-blue-600/10 lg:col-span-2 xl:col-span-2">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group bg-white/5 border-white/10 rounded-3xl backdrop-blur-xl hover:bg-white/8 hover:border-blue-600/30 hover:shadow-blue-600/10 lg:col-span-2 xl:col-span-2">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5 group-hover:opacity-100"></div>
                 <div className="relative z-10 space-y-6">
                   <div className="text-center">
-                    <h4 className="text-xl lg:text-2xl font-bold text-white mb-2">
-                      <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                    <h4 className="mb-2 text-xl font-bold text-white lg:text-2xl">
+                      <span className="text-transparent bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text">
                         Web Development
                       </span>
                     </h4>
-                    <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+                    <div className="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-indigo-500"></div>
                   </div>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5">
                     {skillCategories["Web Development"].map((skill, idx) => {
                       const isBallerina = skill.name && skill.name.toLowerCase() === 'ballerina'
                       return (
-                        <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-xl backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                        <div key={idx} className="flex flex-col items-center p-3 transition-all duration-300 border bg-white/10 border-white/20 rounded-xl backdrop-blur-sm hover:bg-white/15 hover:scale-105">
                           <div className={"bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 " + (isBallerina ? 'w-14 h-14' : 'w-12 h-12')}>
                             <img
                               src={skill.logo}
@@ -516,7 +516,7 @@ export default function Home() {
                               onError={(e) => { e.currentTarget.style.display = 'none'; }}
                             />
                           </div>
-                          <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                          <div className="text-sm font-semibold text-center text-white/90">{skill.name}</div>
                         </div>
                       )
                     })}
@@ -525,12 +525,12 @@ export default function Home() {
               </div>
 
               {/* Database */}
-              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-indigo-500/30 shadow-xl hover:shadow-indigo-500/10">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/5 via-transparent to-blue-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group bg-white/5 border-white/10 rounded-3xl backdrop-blur-xl hover:bg-white/8 hover:border-indigo-500/30 hover:shadow-indigo-500/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-indigo-500/5 via-transparent to-blue-700/5 group-hover:opacity-100"></div>
                 <div className="relative z-10 space-y-4">
                   <div className="text-center">
-                    <h4 className="text-lg lg:text-xl font-bold text-white mb-1">
-                      <span className="bg-gradient-to-r from-indigo-400 to-blue-600 bg-clip-text text-transparent">
+                    <h4 className="mb-1 text-lg font-bold text-white lg:text-xl">
+                      <span className="text-transparent bg-gradient-to-r from-indigo-400 to-blue-600 bg-clip-text">
                         Database
                       </span>
                     </h4>
@@ -538,11 +538,11 @@ export default function Home() {
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {skillCategories["Database"].map((skill, idx) => (
-                      <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
-                        <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
-                          <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      <div key={idx} className="flex flex-col items-center p-3 transition-all duration-300 border rounded-lg bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 hover:scale-105">
+                        <div className="flex items-center justify-center w-12 h-12 p-2 mb-2 rounded-lg bg-white/20">
+                          <img src={skill.logo} alt={skill.name} className="object-contain w-8 h-8" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                         </div>
-                        <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                        <div className="text-sm font-semibold text-center text-white/90">{skill.name}</div>
                       </div>
                     ))}
                   </div>
@@ -550,12 +550,12 @@ export default function Home() {
               </div>
 
               {/* Mobile App Development */}
-              <div className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-purple-600/30 shadow-xl hover:shadow-purple-600/10">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-600/5 via-transparent to-purple-800/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group bg-white/5 border-white/10 rounded-3xl backdrop-blur-xl hover:bg-white/8 hover:border-purple-600/30 hover:shadow-purple-600/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-purple-600/5 via-transparent to-purple-800/5 group-hover:opacity-100"></div>
                 <div className="relative z-10 space-y-4">
                   <div className="text-center">
-                    <h4 className="text-lg lg:text-xl font-bold text-white mb-1">
-                      <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                    <h4 className="mb-1 text-lg font-bold text-white lg:text-xl">
+                      <span className="text-transparent bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text">
                         Mobile App Development
                       </span>
                     </h4>
@@ -563,11 +563,11 @@ export default function Home() {
                   </div>
                   <div className="flex justify-center">
                     {skillCategories["Mobile App Development"].map((skill, idx) => (
-                      <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
-                        <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
-                          <img src={skill.logo} alt={skill.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      <div key={idx} className="flex flex-col items-center p-3 transition-all duration-300 border rounded-lg bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 hover:scale-105">
+                        <div className="flex items-center justify-center w-12 h-12 p-2 mb-2 rounded-lg bg-white/20">
+                          <img src={skill.logo} alt={skill.name} className="object-contain w-8 h-8" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                         </div>
-                        <div className="text-sm font-semibold text-white/90 text-center">{skill.name}</div>
+                        <div className="text-sm font-semibold text-center text-white/90">{skill.name}</div>
                       </div>
                     ))}
                   </div>
@@ -578,22 +578,22 @@ export default function Home() {
 
           {/* Tools & Platforms Section - Part 2 */}
           <div>
-            <div className="text-center mb-12">
-              <h3 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-title">
+            <div className="mb-12 text-center">
+              <h3 className="mb-4 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text font-title">
                 Tools & Platforms
               </h3>
               <p className="text-blue-300 font-satisfy">Development tools and collaboration platforms</p>
             </div>
             
             {/* Tools & Platforms Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {Object.entries(toolsAndPlatforms).map(([category, tools]) => (
-                <div key={category} className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:border-purple-600/30 shadow-xl hover:shadow-purple-600/10">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-600/5 via-transparent to-blue-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div key={category} className="relative p-6 transition-all duration-500 border shadow-xl group bg-white/5 border-white/10 rounded-3xl backdrop-blur-xl hover:bg-white/8 hover:border-purple-600/30 hover:shadow-purple-600/10">
+                  <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-purple-600/5 via-transparent to-blue-700/5 group-hover:opacity-100"></div>
                   <div className="relative z-10 space-y-4">
                     <div className="text-center">
-                      <h4 className="text-lg font-bold text-white mb-1">
-                        <span className="bg-gradient-to-r from-purple-500 to-blue-600 bg-clip-text text-transparent">
+                      <h4 className="mb-1 text-lg font-bold text-white">
+                        <span className="text-transparent bg-gradient-to-r from-purple-500 to-blue-600 bg-clip-text">
                           {category}
                         </span>
                       </h4>
@@ -601,11 +601,11 @@ export default function Home() {
                     </div>
                     <div className={`grid gap-3 ${tools.length === 1 ? 'justify-center flex' : tools.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
                       {tools.map((tool, idx) => (
-                        <div key={idx} className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
-                          <div className="bg-white/20 rounded-lg p-2 flex items-center justify-center mb-2 w-12 h-12">
-                            <img src={tool.logo} alt={tool.name} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        <div key={idx} className="flex flex-col items-center p-3 transition-all duration-300 border rounded-lg bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 hover:scale-105">
+                          <div className="flex items-center justify-center w-12 h-12 p-2 mb-2 rounded-lg bg-white/20">
+                            <img src={tool.logo} alt={tool.name} className="object-contain w-8 h-8" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                           </div>
-                          <div className="text-sm font-semibold text-white/90 text-center leading-tight">{tool.name}</div>
+                          <div className="text-sm font-semibold leading-tight text-center text-white/90">{tool.name}</div>
                         </div>
                       ))}
                     </div>
@@ -617,39 +617,39 @@ export default function Home() {
 
           {/* Skills Summary */}
           <div className="mt-16 text-center">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-purple-500/30 shadow-xl hover:shadow-purple-500/10">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/5 via-transparent to-purple-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 text-3xl font-bold text-purple-400 mb-2">5</div>
-                <div className="relative z-10 text-sm text-purple-300 font-medium">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-purple-500/30 hover:shadow-purple-500/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-purple-500/5 via-transparent to-purple-700/5 group-hover:opacity-100"></div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-purple-400">5</div>
+                <div className="relative z-10 text-sm font-medium text-purple-300">
                   Programming Languages
                 </div>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-blue-500/30 shadow-xl hover:shadow-blue-500/10">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/5 via-transparent to-blue-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 text-3xl font-bold text-blue-400 mb-2">10</div>
-                <div className="relative z-10 text-sm text-blue-300 font-medium">
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-blue-500/30 hover:shadow-blue-500/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-blue-500/5 via-transparent to-blue-700/5 group-hover:opacity-100"></div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-blue-400">10</div>
+                <div className="relative z-10 text-sm font-medium text-blue-300">
                   Web Technologies
                 </div>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-indigo-500/30 shadow-xl hover:shadow-indigo-500/10">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 via-transparent to-indigo-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 text-3xl font-bold text-indigo-400 mb-2">3</div>
-                <div className="relative z-10 text-sm text-indigo-300 font-medium">
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-indigo-500/30 hover:shadow-indigo-500/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 via-transparent to-indigo-700/5 group-hover:opacity-100"></div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-indigo-400">3</div>
+                <div className="relative z-10 text-sm font-medium text-indigo-300">
                   Database Systems
                 </div>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-purple-600/30 shadow-xl hover:shadow-purple-600/10">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-600/5 via-transparent to-purple-800/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 text-3xl font-bold text-purple-500 mb-2">1</div>
-                <div className="relative z-10 text-sm text-purple-300 font-medium">
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-purple-600/30 hover:shadow-purple-600/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-purple-600/5 via-transparent to-purple-800/5 group-hover:opacity-100"></div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-purple-500">1</div>
+                <div className="relative z-10 text-sm font-medium text-purple-300">
                   Mobile Development
                 </div>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-105 hover:border-blue-700/30 shadow-xl hover:shadow-blue-700/10">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-700/5 via-transparent to-indigo-800/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 text-3xl font-bold text-blue-500 mb-2">8</div>
-                <div className="relative z-10 text-sm text-blue-300 font-medium">
+              <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-blue-700/30 hover:shadow-blue-700/10">
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-blue-700/5 via-transparent to-indigo-800/5 group-hover:opacity-100"></div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-blue-500">8</div>
+                <div className="relative z-10 text-sm font-medium text-blue-300">
                   Development Tools
                 </div>
               </div>
@@ -658,40 +658,40 @@ export default function Home() {
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="projects" className="py-16 min-h-screen">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm font-title">
+        <section id="projects" className="min-h-screen py-16">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Featured Projects
             </h2>
-            <p className="text-lg text-purple-300 tracking-wide font-satisfy">
+            <p className="text-lg tracking-wide text-purple-300 font-satisfy">
               Some of my recent work
             </p>
           </div>
 
           <div className="grid gap-12">
             {projects.map((project) => (
-              <div key={project.id} className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 shadow-2xl">
-                <div className="grid lg:grid-cols-2 gap-8">
+              <div key={project.id} className="relative p-8 transition-all duration-500 border shadow-2xl group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8">
+                <div className="grid gap-8 lg:grid-cols-2">
                   {/* Project Info */}
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-2xl lg:text-3xl font-bold text-purple-200 mb-2">
+                      <h3 className="mb-2 text-2xl font-bold text-purple-200 lg:text-3xl">
                         {project.title}
                       </h3>
-                      <p className="text-lg text-purple-300 mb-4">{project.subtitle}</p>
-                      <div className="inline-block px-3 py-1 rounded-full text-sm bg-gradient-to-r from-purple-500/20 to-blue-600/20 text-purple-300 border border-purple-400/30">
+                      <p className="mb-4 text-lg text-purple-300">{project.subtitle}</p>
+                      <div className="inline-block px-3 py-1 text-sm text-purple-300 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-400/30">
                         {project.role}
                       </div>
                     </div>
 
-                    <p className="text-blue-200 leading-relaxed">{project.description}</p>
+                    <p className="leading-relaxed text-blue-200">{project.description}</p>
 
                     <div>
-                      <h4 className="text-lg font-semibold text-purple-200 mb-3">Key Responsibilities:</h4>
+                      <h4 className="mb-3 text-lg font-semibold text-purple-200">Key Responsibilities:</h4>
                       <ul className="space-y-2">
                         {project.responsibilities.map((resp, index) => (
-                          <li key={index} className="text-blue-300 flex items-start">
-                            <span className="text-purple-400 mr-2">•</span>
+                          <li key={index} className="flex items-start text-blue-300">
+                            <span className="mr-2 text-purple-400">•</span>
                             {resp}
                           </li>
                         ))}
@@ -699,10 +699,10 @@ export default function Home() {
                     </div>
 
                     <div>
-                      <h4 className="text-lg font-semibold text-purple-200 mb-3">Technologies:</h4>
+                      <h4 className="mb-3 text-lg font-semibold text-purple-200">Technologies:</h4>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech) => (
-                          <span key={tech} className="px-3 py-1 rounded-full text-sm bg-purple-500/10 text-purple-300 border border-purple-400/20">
+                          <span key={tech} className="px-3 py-1 text-sm text-purple-300 border rounded-full bg-purple-500/10 border-purple-400/20">
                             {tech}
                           </span>
                         ))}
@@ -719,14 +719,14 @@ export default function Home() {
                         <div className="relative w-full h-full bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
                           <div className="w-full h-full bg-black rounded-[2rem] overflow-hidden relative">
                             {/* Notch */}
-                            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-xl z-10"></div>
+                            <div className="absolute top-0 z-10 w-32 h-6 transform -translate-x-1/2 bg-gray-900 left-1/2 rounded-b-xl"></div>
                             
                             {/* Screen Content */}
-                            <div className="w-full h-full relative">
+                            <div className="relative w-full h-full">
                               <img 
                                 src={project.images[currentImageIndex[project.id] || 0]} 
                                 alt={`${project.title} ${(currentImageIndex[project.id] || 0) + 1}`} 
-                                className="w-full h-full object-cover object-center transition-opacity duration-300" 
+                                className="object-cover object-center w-full h-full transition-opacity duration-300" 
                               />
                             </div>
                             
@@ -741,7 +741,7 @@ export default function Home() {
                             {/* Previous Button */}
                             <button
                               onClick={() => prevImage(project.id, project.images.length)}
-                              className="w-10 h-10 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-purple-400/50 shadow-lg hover:shadow-purple-400/25"
+                              className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 border rounded-lg shadow-lg bg-white/10 backdrop-blur-md hover:bg-white/20 border-white/30 hover:scale-110 hover:border-purple-400/50 hover:shadow-purple-400/25"
                               suppressHydrationWarning
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -752,7 +752,7 @@ export default function Home() {
                             {/* Next Button */}
                             <button
                               onClick={() => nextImage(project.id, project.images.length)}
-                              className="w-10 h-10 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-purple-400/50 shadow-lg hover:shadow-purple-400/25"
+                              className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 border rounded-lg shadow-lg bg-white/10 backdrop-blur-md hover:bg-white/20 border-white/30 hover:scale-110 hover:border-purple-400/50 hover:shadow-purple-400/25"
                               suppressHydrationWarning
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -764,33 +764,21 @@ export default function Home() {
                       </div>
                     ) : (
                       /* Laptop Frame for Web Apps */
-                      <div className="relative mx-auto max-w-2xl">
+                      <div className="relative max-w-2xl mx-auto">
                         {/* Laptop Base */}
                         <div className="relative">
                           {/* Laptop Screen */}
-                          <div className="bg-gray-900 rounded-t-2xl p-4 shadow-2xl">
+                          <div className="p-4 bg-gray-900 shadow-2xl rounded-t-2xl">
                             {/* Screen Bezel */}
                             <div className="bg-black rounded-lg overflow-hidden relative aspect-[16/10]">
-                              {/* Top Bar with Dots */}
-                              <div className="absolute top-0 left-0 right-0 h-8 bg-gray-800 flex items-center px-4 z-10">
-                                <div className="flex space-x-2">
-                                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                </div>
-                                <div className="flex-1 text-center">
-                                  <div className="bg-gray-700 rounded px-4 py-1 text-xs text-gray-300 inline-block">
-                                    {project.title}
-                                  </div>
-                                </div>
-                              </div>
+                              
                               
                               {/* Screen Content */}
-                              <div className="w-full h-full pt-8 relative">
+                              <div className="relative w-full h-full pt-8">
                                 <img 
                                   src={project.images[currentImageIndex[project.id] || 0]} 
                                   alt={`${project.title} ${(currentImageIndex[project.id] || 0) + 1}`} 
-                                  className="w-full h-full object-cover object-top transition-opacity duration-300" 
+                                  className="object-cover object-top w-full h-full transition-opacity duration-300" 
                                 />
                               </div>
                               
@@ -803,13 +791,13 @@ export default function Home() {
                           </div>
                           
                           {/* Laptop Base/Keyboard */}
-                          <div className="bg-gray-800 h-6 rounded-b-2xl mx-auto w-full relative">
+                          <div className="relative w-full h-6 mx-auto bg-gray-800 rounded-b-2xl">
                             {/* Trackpad */}
-                            <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-700 rounded"></div>
+                            <div className="absolute w-16 h-4 transform -translate-x-1/2 bg-gray-700 rounded top-1 left-1/2"></div>
                           </div>
                           
                           {/* Laptop Stand */}
-                          <div className="bg-gray-600 h-2 rounded-b mx-auto w-3/4 relative"></div>
+                          <div className="relative w-3/4 h-2 mx-auto bg-gray-600 rounded-b"></div>
                         </div>
                         
                         {/* Navigation Arrows for Laptop - Below the frame */}
@@ -818,7 +806,7 @@ export default function Home() {
                             {/* Previous Button */}
                             <button
                               onClick={() => prevImage(project.id, project.images.length)}
-                              className="w-10 h-10 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-purple-400/50 shadow-lg hover:shadow-purple-400/25"
+                              className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 border rounded-lg shadow-lg bg-white/10 backdrop-blur-md hover:bg-white/20 border-white/30 hover:scale-110 hover:border-purple-400/50 hover:shadow-purple-400/25"
                               suppressHydrationWarning
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -829,7 +817,7 @@ export default function Home() {
                             {/* Next Button */}
                             <button
                               onClick={() => nextImage(project.id, project.images.length)}
-                              className="w-10 h-10 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-purple-400/50 shadow-lg hover:shadow-purple-400/25"
+                              className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 border rounded-lg shadow-lg bg-white/10 backdrop-blur-md hover:bg-white/20 border-white/30 hover:scale-110 hover:border-purple-400/50 hover:shadow-purple-400/25"
                               suppressHydrationWarning
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -866,75 +854,75 @@ export default function Home() {
         </section>
 
         {/* CONTACT SECTION */}
-        <section id="contact" className="py-16 min-h-screen">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm font-title">
+        <section id="contact" className="min-h-screen py-16">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Get In Touch
             </h2>
-            <p className="text-lg text-purple-300 tracking-wide max-w-2xl mx-auto font-satisfy">
+            <p className="max-w-2xl mx-auto text-lg tracking-wide text-purple-300 font-satisfy">
               I&apos;m always interested in new opportunities and exciting projects. 
               Whether you want to discuss a project, job opportunity, or just say hello, I&apos;d love to hear from you!
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+          <div className="grid max-w-6xl gap-12 mx-auto lg:grid-cols-2">
             {/* Left Side - Contact Information */}
             <div className="space-y-8">
               
               {/* Contact Info Cards */}
-              <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl">
-                <h3 className="text-2xl font-bold text-purple-300 mb-6 font-title">Contact Information</h3>
+              <div className="relative p-8 border group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl">
+                <h3 className="mb-6 text-2xl font-bold text-purple-300 font-title">Contact Information</h3>
                 <div className="space-y-4">
                   
                   {/* Email */}
-                  <a href="mailto:sachinikalansooriya22@gmail.com" className="group flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 hover:bg-white/10">
-                    <div className="p-3 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-300 group-hover:bg-purple-500/30 group-hover:scale-110 transition-all duration-300">
+                  <a href="mailto:sachinikalansooriya22@gmail.com" className="flex items-center p-4 space-x-4 transition-all duration-300 group rounded-xl hover:scale-105 hover:bg-white/10">
+                    <div className="p-3 text-purple-300 transition-all duration-300 border rounded-lg bg-purple-500/20 border-purple-500/30 group-hover:bg-purple-500/30 group-hover:scale-110">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-white/90 font-semibold">Email</p>
-                      <p className="text-white/70 group-hover:text-purple-300 transition-colors">sachinikalansooriya22@gmail.com</p>
+                      <p className="font-semibold text-white/90">Email</p>
+                      <p className="transition-colors text-white/70 group-hover:text-purple-300">sachinikalansooriya22@gmail.com</p>
                     </div>
                   </a>
 
                   {/* Phone */}
-                  <a href="tel:+94771896153" className="group flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 hover:bg-white/10">
-                    <div className="p-3 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-300 group-hover:bg-purple-500/30 group-hover:scale-110 transition-all duration-300">
+                  <a href="tel:+94771896153" className="flex items-center p-4 space-x-4 transition-all duration-300 group rounded-xl hover:scale-105 hover:bg-white/10">
+                    <div className="p-3 text-purple-300 transition-all duration-300 border rounded-lg bg-purple-500/20 border-purple-500/30 group-hover:bg-purple-500/30 group-hover:scale-110">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-white/90 font-semibold">Phone</p>
-                      <p className="text-white/70 group-hover:text-purple-300 transition-colors">+94 771896153</p>
+                      <p className="font-semibold text-white/90">Phone</p>
+                      <p className="transition-colors text-white/70 group-hover:text-purple-300">+94 771896153</p>
                     </div>
                   </a>
 
                   {/* Location */}
-                  <div className="flex items-center space-x-4 p-4 rounded-xl">
-                    <div className="p-3 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-300">
+                  <div className="flex items-center p-4 space-x-4 rounded-xl">
+                    <div className="p-3 text-purple-300 border rounded-lg bg-purple-500/20 border-purple-500/30">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-white/90 font-semibold">Location</p>
+                      <p className="font-semibold text-white/90">Location</p>
                       <p className="text-white/70">Galle, Sri Lanka</p>
                     </div>
                   </div>
 
                   {/* Work Status */}
-                  <div className="flex items-center space-x-4 p-4 rounded-xl">
-                    <div className="p-3 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-300">
+                  <div className="flex items-center p-4 space-x-4 rounded-xl">
+                    <div className="p-3 text-purple-300 border rounded-lg bg-purple-500/20 border-purple-500/30">
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-white/90 font-semibold">Work Status</p>
+                      <p className="font-semibold text-white/90">Work Status</p>
                       <p className="text-white/70">Open to Opportunities</p>
                     </div>
                   </div>
@@ -942,13 +930,13 @@ export default function Home() {
               </div>
 
               {/* Social Links & Resume */}
-              <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl">
+              <div className="relative p-8 border group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold text-blue-300 font-title">Follow Me</h3>
                   <a
-                    href="/resume.pdf"
+                    href="/SachiniKalansooriyaCV.pdf"
                     download
-                    className="inline-flex items-center px-4 py-2 bg-blue-600/20 backdrop-blur-md border border-blue-500/60 hover:bg-blue-600/40 text-white rounded-lg shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-300 font-medium"
+                    className="inline-flex items-center px-4 py-2 font-medium text-white transition-all duration-300 border rounded-lg shadow-lg bg-blue-600/20 backdrop-blur-md border-blue-500/60 hover:bg-blue-600/40 hover:shadow-blue-500/25 hover:scale-105"
                   >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -963,7 +951,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/sachini-kalansooriya/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 rounded-xl border border-purple-500/60 bg-purple-500/20 backdrop-blur-md hover:bg-purple-500/30 hover:border-purple-500 transition-all duration-300 hover:scale-110 group shadow-lg hover:shadow-purple-500/25"
+                    className="p-4 transition-all duration-300 border shadow-lg rounded-xl border-purple-500/60 bg-purple-500/20 backdrop-blur-md hover:bg-purple-500/30 hover:border-purple-500 hover:scale-110 group hover:shadow-purple-500/25"
                   >
                     <div className="text-purple-300 transition-colors">
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -977,7 +965,7 @@ export default function Home() {
                     href="https://github.com/SachiniKalansooriya"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 rounded-xl border border-purple-500/60 bg-purple-500/20 backdrop-blur-md hover:bg-purple-500/30 hover:border-purple-500 transition-all duration-300 hover:scale-110 group shadow-lg hover:shadow-purple-500/25"
+                    className="p-4 transition-all duration-300 border shadow-lg rounded-xl border-purple-500/60 bg-purple-500/20 backdrop-blur-md hover:bg-purple-500/30 hover:border-purple-500 hover:scale-110 group hover:shadow-purple-500/25"
                   >
                     <div className="text-purple-300 transition-colors">
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -989,11 +977,11 @@ export default function Home() {
               </div>
 
               {/* Availability Status */}
-              <div className="group relative p-6 rounded-3xl border border-purple-500/30 bg-purple-500/10 backdrop-blur-xl">
+              <div className="relative p-6 border group rounded-3xl border-green-500/30 bg-green-500/10 backdrop-blur-xl">
                 <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                   <div>
-                    <div className="font-semibold text-purple-300">Available for Work</div>
+                    <div className="font-semibold text-green-300">Available for Work</div>
                     <div className="text-sm text-white/70">
                       Currently seeking new opportunities
                     </div>
@@ -1003,8 +991,8 @@ export default function Home() {
             </div>
 
             {/* Right Side - Contact Form */}
-            <div className="group relative p-8 rounded-3xl border border-blue-500/30 bg-white/5 backdrop-blur-xl hover:shadow-blue-500/10 transition-all duration-500 shadow-xl">
-              <h3 className="text-2xl font-bold text-blue-300 mb-6 font-title">Send Message</h3>
+            <div className="relative p-8 transition-all duration-500 border shadow-xl group rounded-3xl border-blue-500/30 bg-white/5 backdrop-blur-xl hover:shadow-blue-500/10">
+              <h3 className="mb-6 text-2xl font-bold text-blue-300 font-title">Send Message</h3>
               
               {submitStatus && (
                 <div className={`mb-6 p-4 rounded-lg ${submitStatus.toLowerCase().includes('failed') ? 'bg-red-500/20 border border-red-500/50 text-red-300' : 'bg-purple-500/20 border border-purple-500/50 text-purple-300'} text-center font-medium`}>
@@ -1015,7 +1003,7 @@ export default function Home() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Input */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-white/90">
+                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-white/90">
                     Your Name *
                   </label>
                   <input
@@ -1025,7 +1013,7 @@ export default function Home() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-blue-500/30 text-white placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 shadow-md hover:shadow-blue-500/20 transition-all duration-300"
+                    className="w-full px-4 py-3 text-white transition-all duration-300 border rounded-lg shadow-md bg-white/10 backdrop-blur-sm border-blue-500/30 placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 hover:shadow-blue-500/20"
                     placeholder="Enter your full name"
                     suppressHydrationWarning
                   />
@@ -1033,7 +1021,7 @@ export default function Home() {
 
                 {/* Email Input */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-white/90">
+                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-white/90">
                     Email Address *
                   </label>
                   <input
@@ -1043,7 +1031,7 @@ export default function Home() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-blue-500/30 text-white placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 shadow-md hover:shadow-blue-500/20 transition-all duration-300"
+                    className="w-full px-4 py-3 text-white transition-all duration-300 border rounded-lg shadow-md bg-white/10 backdrop-blur-sm border-blue-500/30 placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 hover:shadow-blue-500/20"
                     placeholder="your.email@example.com"
                     suppressHydrationWarning
                   />
@@ -1051,7 +1039,7 @@ export default function Home() {
 
                 {/* Subject Input */}
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-2 text-white/90">
+                  <label htmlFor="subject" className="block mb-2 text-sm font-medium text-white/90">
                     Subject *
                   </label>
                   <input
@@ -1061,7 +1049,7 @@ export default function Home() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-blue-500/30 text-white placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 shadow-md hover:shadow-blue-500/20 transition-all duration-300"
+                    className="w-full px-4 py-3 text-white transition-all duration-300 border rounded-lg shadow-md bg-white/10 backdrop-blur-sm border-blue-500/30 placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 hover:shadow-blue-500/20"
                     placeholder="What's this about?"
                     suppressHydrationWarning
                   />
@@ -1069,7 +1057,7 @@ export default function Home() {
 
                 {/* Message Textarea */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-white/90">
+                  <label htmlFor="message" className="block mb-2 text-sm font-medium text-white/90">
                     Message *
                   </label>
                   <textarea
@@ -1079,7 +1067,7 @@ export default function Home() {
                     onChange={handleInputChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-blue-500/30 text-white placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 shadow-md hover:shadow-blue-500/20 resize-none transition-all duration-300"
+                    className="w-full px-4 py-3 text-white transition-all duration-300 border rounded-lg shadow-md resize-none bg-white/10 backdrop-blur-sm border-blue-500/30 placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 hover:shadow-blue-500/20"
                     placeholder="Tell me about your project, job opportunity, or just say hello!"
                     suppressHydrationWarning
                   />
@@ -1096,7 +1084,7 @@ export default function Home() {
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 -ml-1 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
