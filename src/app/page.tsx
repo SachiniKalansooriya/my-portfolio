@@ -371,7 +371,7 @@ export default function Home() {
         "Ultrasonic sensor triggers buzzer until tray is removed.",
         "Alerts sent via CallMeBot's WhatsApp API for caregivers and patients."
       ],
-      images: ["/Medisync.png"],
+      images: ["/medisync.png"],
       type: "IoT/Embedded System",
       repoUrl: "https://github.com/vishwajayawickrama/Automatic-Medicine-Remider-Dispenser",
     },
