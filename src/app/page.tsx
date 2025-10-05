@@ -3,6 +3,14 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function Home() {
+  // Add smooth scrolling behavior
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth'
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto'
+    }
+  }, [])
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +21,39 @@ export default function Home() {
   const [submitStatus, setSubmitStatus] = useState('')
   const [currentImageIndex, setCurrentImageIndex] = useState<{[key: number]: number}>({})
   const [activeSection, setActiveSection] = useState('home')
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set(['home']))
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id
+          setVisibleSections(prev => new Set([...prev, sectionId]))
+          
+          // Add visible class to the section
+          entry.target.classList.add('visible')
+          
+          // Add visible class to child elements with animation classes
+          const animatedElements = entry.target.querySelectorAll('.animate-slide-up, .animate-slide-up-delay')
+          animatedElements.forEach(el => {
+            el.classList.add('visible')
+          })
+        }
+      })
+    }, observerOptions)
+
+    // Observe all sections
+    const sections = document.querySelectorAll('section[id]')
+    sections.forEach(section => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
@@ -28,7 +69,7 @@ export default function Home() {
   // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'education', 'skills', 'projects', 'contact']
+      const sections = ['home', 'education', 'skills', 'projects', 'memberships', 'certifications', 'contact']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -105,7 +146,7 @@ export default function Home() {
     "Programming Languages": [
       { name: "C", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
       { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-     
+     { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
     ],
     "Web Development": [
       { name: "HTML", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
@@ -115,7 +156,7 @@ export default function Home() {
       { name: "Three.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
       { name: "Node", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
       { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-       { name: "Javascript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "Javascript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
       { name: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
       { name: "Tailwind", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
@@ -134,6 +175,9 @@ export default function Home() {
 
   const toolsAndPlatforms = {
     // Tools & Platforms - Part 2
+    "Testing Tools": [
+      { name: "Postman", logo: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" }
+    ],
     "Version Control": [
       { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
       { name: "Github", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" }
@@ -157,9 +201,29 @@ export default function Home() {
   const projects = [
     {
       id: 1,
-      title: "WebCAD - 2D & 3D Modeling Creation System",
-      subtitle: "Mentored By Turbogen • Second Year Software Project",
+      title: "Automobile Service Management System",
+      subtitle: "Group Project",
       role: "Full-stack Developer, UI/UX Designer",
+      timeline: "ONGOING",
+      technologies: ["Spring Boot","React","MySQL","Docker","WebSockets","REST APIs"],
+      highlightsTitle: "Project Highlights",
+      highlights: [
+        "Designing and developing a full-stack enterprise web application for automobile service management.",
+        "Implementing customer features (secure authentication,appointment booking, real-time tracking) and employee features(time logging, workload monitoring).",
+        "Building real-time updates and role-based access control.",
+        "Containerizing the system for efficient deployment.",
+        "Integrating a Generative AI chatbot for appointment slot checking."
+      ],
+      images: ["/Autocare.png"],
+      type: "Web Application",
+      repoUrl: "private",
+    },
+    {
+      id: 2,
+      title: "WebCAD - 2D & 3D Modeling Creation System",
+      subtitle: "Mentored By Turbogen • Second Year Software Group Project",
+      role: "Full-stack Developer, UI/UX Designer",
+      timeline: "Jun 2024 - Jun 2025",
       technologies: ["React.js", "Tailwind", "Three.js", "Node.js", "Express", "PostgreSQL", "Socket.io", "Docker"],
       description: "WebCAD is a browser-based 3D modeling application with sketching, editing and export features. Supports collaboration and versioning.",
       responsibilities: [
@@ -168,29 +232,33 @@ export default function Home() {
         "Enabled users to create, save, and load custom designs.",
         "Built backend APIs for efficient user data storage and feature support",
       ],
-      images: ["/webcad1.png", "/webcad2.png", "/webcad3.png", "/webcad4.png"],
+      images: ["/webcad2.png","/webcad1.png",  "/webcad3.png", "/webcad4.png"],
       type: "Web Application",
+      repoUrl: "private",
     },
     {
-      id: 2,
+      id: 3,
       title: "STYRA - AI-powered wardrobe stylist mobile app",
       subtitle: "Individual Project",
       role: "Mobile App Developer",
+      timeline: "sep 2025",
       technologies: ["React Native", "Expo", "FastAPI", "CLIP", "PostgreSQL"],
       description: "AI-powered wardrobe stylist mobile app that analyzes clothing, manages wardrobe and recommends outfits based on weather and preferences.",
       responsibilities: [
-        "Developed the AI clothing analysis feature using a deep learning model",
+        "Developed the AI clothing analysis feature using a deep learning model(CLIP)",
         "Built the wardrobe management system with database integration",
         "Implemented outfit recommendation logic based on wardrobe, weather, and user preferences",
       ],
       images: [ "/styra2.PNG","/styra1.PNG", "/styra3.PNG","/styra5.PNG","/styra4.PNG"],
       type: "Mobile Application",
+      repoUrl: "https://github.com/SachiniKalansooriya/Styra",
     },
     {
-      id: 3,
+      id: 4,
       title: "CHATLY - A Real-Time Chat App",
       subtitle: "Individual Project",
       role: "Full-Stack Developer",
+      timeline: "April 2025",
       technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Socket.IO"],
       description: "Real-time chat app with authentication, image uploads, themes, and online presence tracking.",
       responsibilities: [
@@ -198,14 +266,16 @@ export default function Home() {
         "Implemented authentication and profile uploads",
         "Designed the MongoDB schema and APIs",
       ],
-      images: ["/chatly1.png", "/chatly2.png", "/chatly3.png"],
+      images: ["/chatly3.png","/chatly1.png", "/chatly2.png"],
       type: "Web Application",
+      repoUrl: "https://github.com/SachiniKalansooriya/Chatly",
     },
     {
-      id: 4,
+      id: 5,
       title: "SafeRoute - A web app for safe route planning and hazard reporting",
       subtitle: "Group Project",
       role: "Full-Stack Developer",
+      timeline: "Aug 2025",
       technologies: ["Next.js", "Ballerina", "PostgreSQL", "Tailwind CSS"],
       description: "SafeRoute lets users report road hazards with images, view nearby hazards, and get safe route suggestions. It includes user profiles, reports history and an RDA dashboard.",
       responsibilities: [
@@ -215,20 +285,213 @@ export default function Home() {
       ],
       images: ["/saferoute4.jpg", "/saferoute3.jpg",  "/saferoute7.jpg", "/saferoute5.jpg",  "/saferoute1.png", "/saferoute2.jpg"],
       type: "Web Application",
+      repoUrl: "https://github.com/BGMPrabuddhi/iwb25-402-mindkraft",
+    },
+    {
+      id: 7,
+      title: "Personal Portfolio Website",
+      subtitle: "Individual Project",
+      role: "Full-Stack Developer, Designer",
+      timeline: "Oct 2025 - Present",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+      description: "A modern, responsive portfolio website to showcase my skills, projects, education, and contact information. Features glassmorphism design, smooth navigation, and optimized performance for all devices.",
+      responsibilities: [
+        "Designed and developed the entire website UI/UX from scratch",
+        "Implemented responsive layouts and interactive navigation",
+        "Integrated contact form with email functionality",
+        "Deployed the site using Vercel for fast global delivery",
+        "Continuously update content and improve accessibility"
+      ],
+      images: ["/myportfolio.png"],
+      type: "Web Application",
+      repoUrl: "https://github.com/SachiniKalansooriya/my-portfolio",
+    },
+
+    {
+      id: 8,
+      title: "MEDISYNC - Smart Medicine Dispenser & Reminder",
+      subtitle: "First year Hardware Group Project",
+      role: "Embedded Systems Developer, Hardware Designer",
+      timeline: "Aug 2023 - Aug 2024",
+      technologies: [
+        "Arduino IDE", "Firebase", "CallMeBot API", "EasyEDA", "CorelDRAW", "SolidWorks",
+        "ESP32", "NEMA 17 Motors", "Ultrasonic Sensor", "RTC Module", "Keypad", "LCD", "Battery System"
+      ],
+      description: "MEDISYNC is a smart medicine dispensing and reminder system designed to support timely medication intake. Integrates hardware and software for automated dispensing, real-time reminders, and remote notifications.",
+      highlightsTitle: "Project Highlights",
+      highlights: [
+        "Core controller for seamless operation.",
+        "Built with Quasar and Firebase for remote management and updates.",
+        "NEMA 17 stepper motors ensure accurate dispensing.",
+        "Manual requests via keypad and LCD display for flexibility.",
+        "Operates during power cuts for uninterrupted management.",
+        "Ultrasonic sensor triggers buzzer until tray is removed.",
+        "Alerts sent via CallMeBot's WhatsApp API for caregivers and patients."
+      ],
+      images: ["/Medisync.png"],
+      type: "IoT/Embedded System",
+      repoUrl: "https://github.com/vishwajayawickrama/Automatic-Medicine-Remider-Dispenser",
+    },
+
+    {
+      id: 9,
+      title: "DIGITAL STORE",
+      subtitle: "Individual Project",
+      role: "UI/UX Designer",
+      timeline: "Oct 2025",
+      technologies: ["Figma", "UI/UX Design", "Prototyping"],
+      description: "A sleek, modern digital store interface designed in Figma, focusing on usability, accessibility, and visual hierarchy. Includes interactive components, product catalogs, and responsive layouts.",
+      highlightsTitle: "Design Features",
+      highlights: [
+        "Interactive prototypes with micro-interactions",
+        "Responsive design for desktop and mobile",
+        "Accessible color palette and typography",
+        "User-centered design approach",
+        "Complete design system with components"
+      ],
+      images: ["/ds1.png","/ds2.png","/ds3.png"],
+      type: "UI/UX Design",
+      repoUrl: "https://www.figma.com/design/rHcqct4i64TF5VFWwTdj94/Untitled?node-id=10-258&t=Yb7Hc2di84XPznz0-0",
+    },
+  ]
+
+  const memberships = [
+    {
+      id: 1,
+      title: "Member - FIT Moments",
+      organization: "IT Faculty Official Media Unit, University Of Moratuwa",
+      image: "/fitmoments.jpg", 
+      description: "Active member of FIT Moments, contributing to media and event coverage for the IT Faculty at University of Moratuwa."
+    }
+  ]
+
+  const certifications = [
+    {
+      id: 1,
+      title: "Version Control Certificate",
+      issuer: "Coursera, offered by Meta",
+      date: "2024",
+      category: "Technical Skill"
+    },
+    {
+      id: 2,
+      title: "Python for Beginners",
+      issuer: "University of Moratuwa",
+      date: "2024",
+      category: "Programming Language"
+    },
+    
+    {
+      id: 3,
+      title: "CodeRush 2024 – Hackathon Participant",
+      issuer: "Organized by INTECS, University of Moratuwa",
+      date: "2024",
+      category: "Hackathon"
+    },
+    {
+      id: 4,
+      title: "Innovate with Ballerina Coding Challenge – Participant",
+      issuer: "Organized by IEEE UoM in collaboration with WSO2",
+      date: "2025",
+      category: "Coding Challenge"
     },
   ]
 
   return (
-    <main className="min-h-screen text-[var(--text)] relative">
+    <>
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slideUpFade {
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slideUpStagger {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .animate-slide-up.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .animate-slide-up-delay {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-slide-up-delay.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        /* Ensure sections start hidden except home */
+        section:not(#home) {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+        
+        section:not(#home).visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.2s; }
+        .stagger-2 { transition-delay: 0.4s; }
+        .stagger-3 { transition-delay: 0.6s; }
+        .stagger-4 { transition-delay: 0.8s; }
+        .stagger-5 { transition-delay: 1.0s; }
+        
+        * {
+          transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+      `}</style>
+      
+      <main className="min-h-screen text-[var(--text)] relative transition-all duration-300 ease-in-out">
       {/* Background image with dark gray overlay - Fixed to viewport */}
       <div 
-        className="fixed inset-0 bg-fixed bg-center bg-no-repeat bg-cover"
+        className="fixed inset-0 transition-all duration-700 ease-in-out bg-fixed bg-center bg-no-repeat bg-cover"
         style={{ backgroundImage: 'url(/background.jpg)' }}
       />
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-[1.5px]" />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-[1.5px] transition-all duration-500 ease-in-out" />
       
       {/* Subtle gray gradient overlay to add depth */}
-      <div className="fixed inset-0 bg-gradient-to-br from-gray-800/8 via-transparent to-black/20" />
+      <div className="fixed inset-0 transition-opacity duration-500 ease-in-out bg-gradient-to-br from-gray-800/8 via-transparent to-black/20" />
       
       {/* Floating Navigation */}
       <nav className="fixed z-50 flex flex-col space-y-3 top-6 right-6">
@@ -270,6 +533,24 @@ export default function Home() {
             )
           },
           { 
+            id: 'memberships', 
+            label: 'Memberships',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-.83.67-1.5 1.5-1.5S12 9.67 12 10.5V11h2c1.11 0 2 .89 2 2v5h3v4c0 1.11-.89 2-2 2H6c-1.11 0-2-.89-2-2z"/>
+              </svg>
+            )
+          },
+          { 
+            id: 'certifications', 
+            label: 'Certifications',
+            icon: (
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            )
+          },
+          { 
             id: 'contact', 
             label: 'Contact',
             icon: (
@@ -302,13 +583,13 @@ export default function Home() {
         ))}
       </nav>
       
-      <div className="container relative z-10 px-6 py-12 mx-auto font-sans sm:px-8 md:px-12 lg:px-24 xl:px-32">
+      <div className="container relative z-10 px-6 py-12 mx-auto font-sans transition-all duration-500 ease-in-out sm:px-8 md:px-12 lg:px-24 xl:px-32 animate-fade-in">
 
         {/* HOME SECTION */}
         <section id="home" className="grid items-start min-h-screen grid-cols-1 gap-8 pt-6 pb-12 lg:grid-cols-2">
           {/* Left content */}
           <div className="max-w-xl space-y-6">
-            <div className="text-lg font-semibold text-transparent bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text">Hey there,</div>
+            <div className="text-xl font-semibold text-transparent bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text">Hey there,</div>
 
             <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
              <p className="font-libre"> I Am </p><span className="text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-300 bg-clip-text font-libre">Sachini Kalansooriya</span>
@@ -333,7 +614,7 @@ export default function Home() {
 
             <div className="flex items-center gap-4 mt-4">
               {/* social icons (simple circles) */}
-              <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://www.linkedin.com/in/sachini-kalansooriya/" aria-label="linkedin">in</a>
+              <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://www.linkedin.com/in/sachini-kalansooriya/" target="_blank" aria-label="linkedin">in</a>
               <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://github.com/SachiniKalansooriya" target="_blank" rel="noreferrer" aria-label="github">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.835 2.805 1.305 3.49.997.108-.775.418-1.305.76-1.605-2.665-.3-5.467-1.335-5.467-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.096.81 2.21 0 1.595-.015 2.88-.015 3.27 0 .32.21.694.825.576C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z" />
@@ -359,10 +640,10 @@ export default function Home() {
         {/* EDUCATION SECTION */}
         <section id="education" className="min-h-screen py-16">
           {/* Header */}
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+          <div className="mb-16 text-center animate-slide-up-delay stagger-1">
+            <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Education
-            </h2>
+            </h3>
             <p className="text-lg tracking-wide text-purple-400 font-satisfy">
               My academic journey and achievements
             </p>
@@ -372,15 +653,18 @@ export default function Home() {
           <div className="grid gap-10 mb-12 lg:grid-cols-2">
             
             {/* University Education Card */}
-            <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-[1.02] hover:border-purple-500/30 shadow-2xl hover:shadow-purple-500/10">
+            <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-[1.02] hover:border-purple-500/30 shadow-2xl hover:shadow-purple-500/10 animate-slide-up-delay stagger-2">
               
               {/* Subtle glow effect */}
               <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-purple-500/5 via-transparent to-blue-600/5 group-hover:opacity-100"></div>
               
               {/* University Header */}
               <div className="relative z-10">
+                <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden border-2 rounded-full shadow-lg border-purple-300/30">
+                  <Image src="/uom-logo.jpg" alt="University of Moratuwa Logo" width={80} height={80} className="object-cover w-full h-full" />
+                </div>
                 <div className="flex items-start justify-between mb-8">
-                  <div className="flex-1">
+                  <div className="flex-1 pr-20"> {/* Added padding to make room for the logo */}
                     <h3 className="mb-4 text-2xl font-bold leading-tight text-purple-300 lg:text-3xl">
                       B.Sc. (Hons) Degree in<br/>
                       <span className="text-transparent bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text">
@@ -394,14 +678,12 @@ export default function Home() {
                       <p className="text-xl font-bold text-purple-300">
                         University of Moratuwa
                       </p>
-                      <p className="font-medium text-white/70">
-                        Sri Lanka
-                      </p>
                     </div>
-                  </div>
-                  <div className="ml-4 text-right">
-                    <div className="px-4 py-2 text-sm font-semibold text-purple-400 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-500/30 backdrop-blur-sm">
-                      2023 - present
+                    {/* Moved date badge to bottom */}
+                    <div className="mt-6">
+                      <div className="inline-block px-4 py-2 text-sm font-semibold text-purple-400 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-500/30 backdrop-blur-sm">
+                        2023 - present
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -409,15 +691,18 @@ export default function Home() {
             </div>
 
             {/* A-Level Results Card */}
-            <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-[1.02] hover:border-blue-600/30 shadow-2xl hover:shadow-blue-600/10">
+            <div className="group relative p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 transition-all duration-500 hover:scale-[1.02] hover:border-blue-600/30 shadow-2xl hover:shadow-blue-600/10 animate-slide-up-delay stagger-3">
               
               {/* Subtle glow effect */}
               <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5 group-hover:opacity-100"></div>
               
               {/* A-Level Header */}
               <div className="relative z-10">
+                <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden border-2 rounded-full shadow-lg border-blue-300/30">
+                  <Image src="/anuladevi-logo.jpg" alt="Anuladevi Balika Vidyalaya Logo" width={80} height={80} className="object-cover w-full h-full" />
+                </div>
                 <div className="flex items-start justify-between mb-8">
-                  <div className="flex-1">
+                  <div className="flex-1 pr-20"> {/* Added padding to make room for the logo */}
                     <h3 className="mb-4 text-2xl font-bold leading-tight text-blue-300 lg:text-3xl">
                       <span className="text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text">
                         GCE Advanced Level
@@ -431,10 +716,11 @@ export default function Home() {
                         Anuladevi Balika Vidyalaya
                       </p>
                     </div>
-                  </div>
-                  <div className="ml-4 text-right">
-                    <div className="px-4 py-2 text-sm font-semibold text-purple-400 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-500/30 backdrop-blur-sm">
-                      2021
+                    {/* Moved date badge to bottom */}
+                    <div className="mt-6">
+                      <div className="inline-block px-4 py-2 text-sm font-semibold text-purple-400 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-500/30 backdrop-blur-sm">
+                        2021
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -445,10 +731,10 @@ export default function Home() {
 
         {/* SKILLS SECTION */}
         <section id="skills" className="min-h-screen py-16">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+          <div className="mb-16 text-center animate-slide-up-delay stagger-1">
+            <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Skills & Technologies
-            </h2>
+            </h3>
             <p className="text-lg tracking-wide text-purple-400 font-satisfy">
               Technologies I work with
             </p>
@@ -620,14 +906,14 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
               <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-purple-500/30 hover:shadow-purple-500/10">
                 <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-purple-500/5 via-transparent to-purple-700/5 group-hover:opacity-100"></div>
-                <div className="relative z-10 mb-2 text-3xl font-bold text-purple-400">5</div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-purple-400">3</div>
                 <div className="relative z-10 text-sm font-medium text-purple-300">
                   Programming Languages
                 </div>
               </div>
               <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-blue-500/30 hover:shadow-blue-500/10">
                 <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-blue-500/5 via-transparent to-blue-700/5 group-hover:opacity-100"></div>
-                <div className="relative z-10 mb-2 text-3xl font-bold text-blue-400">10</div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-blue-400">13</div>
                 <div className="relative z-10 text-sm font-medium text-blue-300">
                   Web Technologies
                 </div>
@@ -648,7 +934,7 @@ export default function Home() {
               </div>
               <div className="relative p-6 transition-all duration-500 border shadow-xl group rounded-2xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 hover:scale-105 hover:border-blue-700/30 hover:shadow-blue-700/10">
                 <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-2xl bg-gradient-to-br from-blue-700/5 via-transparent to-indigo-800/5 group-hover:opacity-100"></div>
-                <div className="relative z-10 mb-2 text-3xl font-bold text-blue-500">8</div>
+                <div className="relative z-10 mb-2 text-3xl font-bold text-blue-500">6</div>
                 <div className="relative z-10 text-sm font-medium text-blue-300">
                   Development Tools
                 </div>
@@ -658,41 +944,51 @@ export default function Home() {
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="projects" className="min-h-screen py-16">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+        <section id="projects" className={`min-h-screen py-16 animate-slide-up ${visibleSections.has('projects') ? 'visible' : ''}`}>
+          <div className={`mb-16 text-center animate-slide-up-delay stagger-1 ${visibleSections.has('projects') ? 'visible' : ''}`}>
+            <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Featured Projects
-            </h2>
+            </h3>
             <p className="text-lg tracking-wide text-purple-300 font-satisfy">
               Some of my recent work
             </p>
           </div>
 
           <div className="grid gap-12">
-            {projects.map((project) => (
-              <div key={project.id} className="relative p-8 transition-all duration-500 border shadow-2xl group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8">
-                <div className="grid gap-8 lg:grid-cols-2">
+            {projects.map((project, index) => (
+              <div key={project.id} className={`relative p-8 transition-all duration-500 border shadow-2xl group rounded-3xl border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/8 animate-slide-up-delay stagger-${Math.min(index + 2, 5)} ${visibleSections.has('projects') ? 'visible' : ''}`}>
+                <div className="grid gap-10 lg:grid-cols-2">
                   {/* Project Info */}
                   <div className="space-y-6">
                     <div>
-                      <h3 className="mb-2 text-2xl font-bold text-purple-200 lg:text-3xl">
+                      <h3 className="mb-2 text-xl font-bold text-purple-200 lg:text-2xl">
                         {project.title}
                       </h3>
                       <p className="mb-4 text-lg text-purple-300">{project.subtitle}</p>
-                      <div className="inline-block px-3 py-1 text-sm text-purple-300 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-400/30">
-                        {project.role}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="inline-block px-3 py-1 text-sm text-purple-300 border rounded-full bg-gradient-to-r from-purple-500/20 to-blue-600/20 border-purple-400/30">
+                          {project.role}
+                        </div>
+                        <div className="inline-flex items-center px-3 py-1 text-sm text-blue-300 border rounded-full bg-gradient-to-r from-blue-500/20 to-indigo-600/20 border-blue-400/30">
+                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                          </svg>
+                          {project.timeline}
+                        </div>
                       </div>
                     </div>
 
                     <p className="leading-relaxed text-blue-200">{project.description}</p>
 
                     <div>
-                      <h4 className="mb-3 text-lg font-semibold text-purple-200">Key Responsibilities:</h4>
+                      <h4 className="mb-3 text-lg font-semibold text-purple-200">
+                        {project.highlightsTitle || "Key Responsibilities:"}
+                      </h4>
                       <ul className="space-y-2">
-                        {project.responsibilities.map((resp, index) => (
+                        {(project.highlights || project.responsibilities)?.map((item, index) => (
                           <li key={index} className="flex items-start text-blue-300">
                             <span className="mr-2 text-purple-400">•</span>
-                            {resp}
+                            {item}
                           </li>
                         ))}
                       </ul>
@@ -708,13 +1004,48 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Repository Link */}
+                    <div className="mt-6">
+                      {project.repoUrl === "private" ? (
+                        <div className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 border rounded-lg cursor-not-allowed bg-gray-600/20 border-gray-500/30">
+                          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                          </svg>
+                          Private Repository
+                        </div>
+                      ) : (
+                        <a 
+                          href={project.repoUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="inline-flex items-center px-4 py-2 text-sm font-medium text-purple-300 transition-all duration-300 border rounded-lg border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 hover:border-purple-500 hover:text-purple-200"
+                        >
+                          {project.type === "UI/UX Design" ? (
+                            <>
+                              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.02s-1.354-3.02-3.019-3.02h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.015-4.49-4.491S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h3.117v-6.04H8.148zm7.704 0c2.476 0 4.49 2.015 4.49 4.491s-2.014 4.49-4.49 4.49-4.49-2.015-4.49-4.49 2.014-4.491 4.49-4.491zm0 1.471c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02 3.019-1.355 3.019-3.02-1.354-3.02-3.019-3.02zM8.148 24c-2.476 0-4.49-2.015-4.49-4.491s2.014-4.49 4.49-4.49h4.588V24H8.148zm0-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h3.117v-6.04H8.148z"/>
+                              </svg>
+                              View Figma Design
+                            </>
+                          ) : (
+                            <>
+                              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                              </svg>
+                              View Repository
+                            </>
+                          )}
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   {/* Project Images Carousel */}
                   <div className="relative">
                     {project.type === "Mobile Application" ? (
                       /* Mobile App Frame */
-                      <div className="relative mx-auto w-64 h-[500px]">
+                      <div className="relative mx-auto w-72 h-[550px]">
                         {/* Phone Frame */}
                         <div className="relative w-full h-full bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
                           <div className="w-full h-full bg-black rounded-[2rem] overflow-hidden relative">
@@ -764,22 +1095,24 @@ export default function Home() {
                       </div>
                     ) : (
                       /* Laptop Frame for Web Apps */
-                      <div className="relative max-w-2xl mx-auto">
+                      <div className="relative max-w-3xl mx-auto">
                         {/* Laptop Base */}
                         <div className="relative">
                           {/* Laptop Screen */}
-                          <div className="p-4 bg-gray-900 shadow-2xl rounded-t-2xl">
+                          <div className="p-3 bg-gray-900 shadow-2xl rounded-t-2xl">
                             {/* Screen Bezel */}
-                            <div className="bg-black rounded-lg overflow-hidden relative aspect-[16/10]">
+                            <div className="bg-[#121212] rounded-xl overflow-hidden relative aspect-[16/10] border border-gray-800">
                               
                               
                               {/* Screen Content */}
-                              <div className="relative w-full h-full pt-8">
-                                <img 
-                                  src={project.images[currentImageIndex[project.id] || 0]} 
-                                  alt={`${project.title} ${(currentImageIndex[project.id] || 0) + 1}`} 
-                                  className="object-cover object-top w-full h-full transition-opacity duration-300" 
-                                />
+                              <div className="relative w-full h-full">
+                                <div className="absolute inset-0 overflow-hidden rounded-xl">
+                                  <img 
+                                    src={project.images[currentImageIndex[project.id] || 0]} 
+                                    alt={`${project.title} ${(currentImageIndex[project.id] || 0) + 1}`} 
+                                    className="object-contain w-full h-full transition-opacity duration-300" 
+                                  />
+                                </div>
                               </div>
                               
                               {/* Navigation Arrows for Laptop */}
@@ -853,12 +1186,65 @@ export default function Home() {
           </div>
         </section>
 
+ {/* Memberships & Activities Section */}
+        <section id="memberships" className={`px-4 py-16 md:px-16 animate-slide-up ${visibleSections.has('memberships') ? 'visible' : ''}`}>
+           <div className={`mb-16 text-center animate-slide-up-delay stagger-1 ${visibleSections.has('memberships') ? 'visible' : ''}`}>
+           <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+            Memberships & Activities</h3>
+          </div>
+          <div className="grid gap-12">
+            {memberships.map((membership, index) => (
+              <div key={membership.id} className={`relative flex flex-col md:flex-row items-center md:items-start gap-8 p-8 shadow-lg bg-gradient-to-br from-purple-900/40 to-blue-900/40 rounded-xl min-h-[300px] animate-slide-up-delay stagger-${index + 2} ${visibleSections.has('memberships') ? 'visible' : ''}`}>
+                {/* Logo in top-right corner */}
+                <div className="absolute w-16 h-16 overflow-hidden border-2 border-purple-300 rounded-full shadow-lg top-4 right-4 md:w-20 md:h-20">
+                  <Image src="/fitmoments-logo.jpg" alt="FIT Moments Logo" width={80} height={80} className="object-cover w-full h-full" />
+                </div>
+                
+                <div className="w-full md:w-2/5">
+                  <Image src={membership.image} alt={membership.title} width={600} height={400} className="object-cover w-full h-auto rounded-md shadow-lg" />
+                </div>
+                <div className="flex flex-col justify-center w-full h-full md:w-3/5 md:pt-6">
+                  <h3 className="mb-3 text-3xl font-semibold text-purple-200">{membership.title}</h3>
+                  <p className="mb-6 text-2xl text-purple-300">{membership.organization}</p>
+                  <p className="text-xl text-blue-200">{membership.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Certifications Section */}
+        <section id="certifications" className={`px-4 pt-32 pb-16 md:px-16 animate-slide-up ${visibleSections.has('certifications') ? 'visible' : ''}`}>
+          <div className={`mb-16 text-center animate-slide-up-delay stagger-1 ${visibleSections.has('certifications') ? 'visible' : ''}`}>
+           <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+          Certifications & Achievements</h3>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {certifications.map((cert, index) => (
+              <div key={cert.id} className={`p-6 transition-all duration-300 shadow-lg bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-xl hover:shadow-purple-500/20 hover:-translate-y-1 animate-slide-up-delay stagger-${Math.min(index + 2, 5)} ${visibleSections.has('certifications') ? 'visible' : ''}`}>
+                <div className="flex items-center mb-4">
+                  <div className="flex items-center justify-center w-10 h-10 mr-4 text-purple-300 rounded-full bg-purple-500/20">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  </div>
+                  <span className="px-2 py-1 text-xs text-purple-200 rounded-full bg-purple-500/20">{cert.category}</span>
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-purple-200">{cert.title}</h3>
+                <p className="mb-2 text-blue-300">{cert.issuer}</p>
+                <p className="text-sm text-purple-400">{cert.date}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        
         {/* CONTACT SECTION */}
-        <section id="contact" className="min-h-screen py-16">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-4xl font-bold text-transparent lg:text-5xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+        <section id="contact" className={`min-h-screen pt-32 pb-16 animate-slide-up ${visibleSections.has('contact') ? 'visible' : ''}`}>
+          <div className={`mb-16 text-center animate-slide-up-delay stagger-1 ${visibleSections.has('contact') ? 'visible' : ''}`}>
+             <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
               Get In Touch
-            </h2>
+            </h3>
             <p className="max-w-2xl mx-auto text-lg tracking-wide text-purple-300 font-satisfy">
               I&apos;m always interested in new opportunities and exciting projects. 
               Whether you want to discuss a project, job opportunity, or just say hello, I&apos;d love to hear from you!
@@ -1033,8 +1419,7 @@ export default function Home() {
                     required
                     className="w-full px-4 py-3 text-white transition-all duration-300 border rounded-lg shadow-md bg-white/10 backdrop-blur-sm border-blue-500/30 placeholder-white/50 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/30 hover:shadow-blue-500/20"
                     placeholder="your.email@example.com"
-                    suppressHydrationWarning
-                  />
+                    suppressHydrationWarning                  />
                 </div>
 
                 {/* Subject Input */}
@@ -1104,8 +1489,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Footer */}
+        <footer className="py-8 text-center border-t border-purple-500/20 bg-gradient-to-r from-purple-900/10 to-blue-900/10">
+          <p className="text-purple-300/80">
+            © 2025 Sachini Kalansooriya. All rights reserved.
+          </p>
+        </footer>
+
       </div>
     </main>
+    </>
   )
 }
 
