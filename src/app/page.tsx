@@ -1256,8 +1256,8 @@ export default function Home() {
  {/* Memberships & Activities Section */}
         <section id="memberships" className={`px-4 py-16 md:px-16 animate-slide-up ${visibleSections.has('memberships') ? 'visible' : ''}`}>
            <div className={`mb-16 text-center animate-slide-up-delay stagger-1 ${visibleSections.has('memberships') ? 'visible' : ''}`}>
-           <h3 className="mb-6 text-3xl font-bold text-transparent lg:text-4xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
-            Memberships & Activities</h3>
+           <h4 className="mb-6 text-2xl font-bold text-transparent lg:text-3xl bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text drop-shadow-sm font-title">
+            Memberships & Activities</h4>
           </div>
           <div className="grid gap-12">
             {memberships.map((membership, index) => (
@@ -1271,9 +1271,9 @@ export default function Home() {
                   <Image src={membership.image} alt={membership.title} width={600} height={400} className="object-cover w-full h-auto rounded-md shadow-lg" />
                 </div>
                 <div className="flex flex-col justify-center w-full h-full md:w-3/5 md:pt-6">
-                  <h3 className="mb-3 text-3xl font-semibold text-purple-200">{membership.title}</h3>
-                  <p className="mb-6 text-2xl text-purple-300">{membership.organization}</p>
-                  <p className="text-xl text-blue-200">{membership.description}</p>
+                  <h3 className="mb-3 text-2xl font-semibold text-purple-200">{membership.title}</h3>
+                  <p className="mb-6 text-xl text-purple-300">{membership.organization}</p>
+                  <p className="text-lg text-blue-200">{membership.description}</p>
                 </div>
               </div>
             ))}
