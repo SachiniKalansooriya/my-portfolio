@@ -729,8 +729,8 @@ export default function Home() {
                     {/* Right portrait with circular backdrop */}
           <div className="relative flex justify-center lg:justify-end">
                 <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] flex items-center justify-center">
-                {/* big circular backdrop (larger) */}
-                <div className="absolute w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 -right-2 -top-3 lg:-right-4 lg:-top-6" />
+                {/* big circular backdrop (smaller on mobile) */}
+                <div className="absolute w-72 h-72 sm:w-80 sm:h-80 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 -right-2 -top-3 lg:-right-4 lg:-top-6" />
 
                 {/* portrait (responsive size) */}
                 <div className="relative w-64 h-64 overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
