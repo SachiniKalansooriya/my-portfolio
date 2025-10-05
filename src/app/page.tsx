@@ -573,7 +573,7 @@ export default function Home() {
       <main className="min-h-screen text-[var(--text)] relative transition-all duration-300 ease-in-out">
       {/* Background image with dark gray overlay - Responsive for mobile */}
       <div 
-        className="fixed inset-0 transition-all duration-700 ease-in-out bg-center bg-no-repeat bg-cover md:bg-fixed bg-scroll"
+        className="fixed inset-0 transition-all duration-700 ease-in-out bg-scroll bg-center bg-no-repeat bg-cover md:bg-fixed"
         style={{ 
           backgroundImage: 'url(/background.jpg)',
           minHeight: '100vh'
