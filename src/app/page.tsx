@@ -689,53 +689,66 @@ export default function Home() {
       <div className="container relative z-10 px-6 py-12 mx-auto font-sans transition-all duration-500 ease-in-out sm:px-8 md:px-12 lg:px-24 xl:px-32 animate-fade-in">
 
         {/* HOME SECTION */}
-        <section id="home" className="grid items-start min-h-screen grid-cols-1 gap-8 pt-6 pb-12 lg:grid-cols-2">
-          {/* Left content */}
-          <div className="max-w-xl space-y-6">
-            <div className="text-xl font-semibold text-transparent bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text">Hey there,</div>
+        <section id="home" className="min-h-screen pt-6 pb-12">
+          <div className="grid items-start grid-cols-1 gap-8 lg:grid-cols-2">
+            {/* Left content */}
+            <div className="max-w-xl space-y-6 lg:order-1">
+              <div className="text-xl font-semibold text-transparent bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text">Hey there,</div>
 
-            <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-             <p className="font-libre"> I Am </p><span className="text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-300 bg-clip-text font-libre">Sachini Kalansooriya</span>
-              <span className="inline-block w-1 h-12 ml-2 align-middle bg-purple-400 animate-blink" />
-            </h1>
+              <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+               <p className="font-libre"> I Am </p><span className="text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-300 bg-clip-text font-libre">Sachini Kalansooriya</span>
+                <span className="inline-block w-1 h-12 ml-2 align-middle bg-purple-400 animate-blink" />
+              </h1>
 
-            <p className="text-[var(--text-muted)] text-base">
-             A motivated and versatile software engineering student passionate
-             about full-stack development. Skilled in crafting creative, efficient
-             solutions with modern technologies, I thrive in collaborative, dynamic
-             environments and am eager to contribute to impactful projects while
-             continuously learning and innovating.
-            </p>
+              {/* Profile picture - shows on mobile after name */}
+              <div className="relative flex justify-center lg:hidden">
+                <div className="relative flex items-center justify-center w-80 h-80">
+                  {/* Mobile backdrop */}
+                  <div className="absolute w-72 h-72 rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                  {/* Mobile profile picture */}
+                  <div className="relative w-64 h-64 overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl">
+                    <Image src="/propic.jpg" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
+                  </div>
+                </div>
+              </div>
 
-            <div className="flex flex-wrap items-center gap-4 mt-6">
-              <a href="/SachiniKalansooriyaCV.pdf" download className="relative inline-flex items-center px-5 py-3 overflow-hidden font-medium text-white transition-all duration-300 transform border rounded-md shadow-lg bg-purple-600/20 backdrop-blur-md border-purple-500/60 hover:bg-purple-600/30 hover:shadow-purple-500/25 hover:scale-105 group">
-                <span className="absolute inset-0 transition-all duration-700 transform -translate-x-full opacity-0 bg-gradient-to-r from-white/10 via-white/20 to-transparent group-hover:opacity-100 group-hover:translate-x-full"></span>
-                <span className="relative">Download CV</span>
-              </a>
-              <a href="#contact" className="inline-flex items-center px-5 py-3 border border-purple-500/60 bg-purple-500/10 backdrop-blur-md text-[var(--text)] rounded-md hover:bg-purple-500/20 hover:border-purple-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">Let&apos;s talk</a>
+              <p className="text-[var(--text-muted)] text-base">
+               A motivated and versatile software engineering student passionate
+               about full-stack development. Skilled in crafting creative, efficient
+               solutions with modern technologies, I thrive in collaborative, dynamic
+               environments and am eager to contribute to impactful projects while
+               continuously learning and innovating.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4 mt-6">
+                <a href="/SachiniKalansooriyaCV.pdf" download className="relative inline-flex items-center px-5 py-3 overflow-hidden font-medium text-white transition-all duration-300 transform border rounded-md shadow-lg bg-purple-600/20 backdrop-blur-md border-purple-500/60 hover:bg-purple-600/30 hover:shadow-purple-500/25 hover:scale-105 group">
+                  <span className="absolute inset-0 transition-all duration-700 transform -translate-x-full opacity-0 bg-gradient-to-r from-white/10 via-white/20 to-transparent group-hover:opacity-100 group-hover:translate-x-full"></span>
+                  <span className="relative">Download CV</span>
+                </a>
+                <a href="#contact" className="inline-flex items-center px-5 py-3 border border-purple-500/60 bg-purple-500/10 backdrop-blur-md text-[var(--text)] rounded-md hover:bg-purple-500/20 hover:border-purple-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">Let&apos;s talk</a>
+              </div>
+
+              <div className="flex items-center gap-4 mt-4">
+                {/* social icons (simple circles) */}
+                <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://www.linkedin.com/in/sachini-kalansooriya/" target="_blank" aria-label="linkedin">in</a>
+                <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://github.com/SachiniKalansooriya" target="_blank" rel="noreferrer" aria-label="github">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.835 2.805 1.305 3.49.997.108-.775.418-1.305.76-1.605-2.665-.3-5.467-1.335-5.467-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.096.81 2.21 0 1.595-.015 2.88-.015 3.27 0 .32.21.694.825.576C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4 mt-4">
-              {/* social icons (simple circles) */}
-              <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://www.linkedin.com/in/sachini-kalansooriya/" target="_blank" aria-label="linkedin">in</a>
-              <a className="flex items-center justify-center text-purple-400 transition-all duration-300 border rounded-full shadow-lg w-9 h-9 border-purple-500/60 bg-purple-500/10 backdrop-blur-md hover:bg-purple-500/20 hover:border-purple-500 hover:shadow-purple-500/25" href="https://github.com/SachiniKalansooriya" target="_blank" rel="noreferrer" aria-label="github">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.835 2.805 1.305 3.49.997.108-.775.418-1.305.76-1.605-2.665-.3-5.467-1.335-5.467-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.096.81 2.21 0 1.595-.015 2.88-.015 3.27 0 .32.21.694.825.576C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-                    {/* Right portrait with circular backdrop */}
-          <div className="relative flex justify-center lg:justify-end">
-                <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] flex items-center justify-center">
-                {/* big circular backdrop (mobile centered, desktop offset) */}
-                <div className="absolute w-72 h-72 sm:w-80 sm:h-80 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 md:-right-4 md:-top-6 max-md:top-1/2 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2" />
-
-                {/* portrait (responsive size) */}
+            {/* Right portrait with circular backdrop - Desktop only */}
+            <div className="relative justify-center hidden lg:flex lg:justify-end lg:order-2">
+              <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] flex items-center justify-center">
+                {/* Desktop backdrop */}
+                <div className="absolute w-72 h-72 sm:w-80 sm:h-80 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 md:-right-4 md:-top-6" />
+                {/* Desktop profile picture */}
                 <div className="relative w-64 h-64 overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
                   <Image src="/propic.jpg" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
                 </div>
+              </div>
             </div>
           </div>
         </section>
