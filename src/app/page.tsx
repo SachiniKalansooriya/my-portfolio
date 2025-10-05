@@ -2,6 +2,104 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
+// Floating Particles Component
+const FloatingParticles = () => {
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    size: number;
+    speedX: number;
+    speedY: number;
+    opacity: number;
+  }>>([])
+
+  useEffect(() => {
+    // Generate random particles
+    const generateParticles = () => {
+      const particleCount = 15
+      const newParticles = []
+      
+      for (let i = 0; i < particleCount; i++) {
+        newParticles.push({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * 4 + 2, // 2-6px
+          speedX: (Math.random() - 0.5) * 0.5, // Slow horizontal movement
+          speedY: (Math.random() - 0.5) * 0.5, // Slow vertical movement
+          opacity: Math.random() * 0.6 + 0.2 // 0.2-0.8 opacity
+        })
+      }
+      
+      setParticles(newParticles)
+    }
+
+    generateParticles()
+
+    // Animation loop
+    const animateParticles = () => {
+      setParticles(prevParticles => 
+        prevParticles.map(particle => {
+          let newX = particle.x + particle.speedX
+          let newY = particle.y + particle.speedY
+
+          // Bounce off edges
+          if (newX <= 0 || newX >= window.innerWidth) {
+            particle.speedX *= -1
+            newX = particle.x + particle.speedX
+          }
+          if (newY <= 0 || newY >= window.innerHeight) {
+            particle.speedY *= -1
+            newY = particle.y + particle.speedY
+          }
+
+          return {
+            ...particle,
+            x: newX,
+            y: newY
+          }
+        })
+      )
+    }
+
+    const intervalId = setInterval(animateParticles, 50) // 20 FPS
+
+    // Handle window resize
+    const handleResize = () => {
+      generateParticles()
+    }
+    
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      clearInterval(intervalId)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  return (
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="absolute rounded-full bg-silver animate-pulse"
+          style={{
+            left: `${particle.x}px`,
+            top: `${particle.y}px`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            opacity: particle.opacity,
+            background: 'radial-gradient(circle, rgba(192,192,192,0.8) 0%, rgba(169,169,169,0.4) 100%)',
+            boxShadow: '0 0 6px rgba(192,192,192,0.3)',
+            transition: 'all 0.05s linear'
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
 export default function Home() {
   // Add smooth scrolling behavior and force mobile visibility
   useEffect(() => {
@@ -596,6 +694,9 @@ export default function Home() {
       {/* Subtle gray gradient overlay to add depth */}
       <div className="fixed inset-0 transition-opacity duration-500 ease-in-out bg-gradient-to-br from-gray-800/8 via-transparent to-black/20" />
       
+      {/* Floating Particles Background Effect */}
+      <FloatingParticles />
+      
       {/* Floating Navigation */}
       <nav className="fixed z-50 flex flex-col space-y-3 top-6 right-6">
         {[
@@ -712,12 +813,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <p className="text-[var(--text-muted)] text-base text-center lg:text-left px-4 lg:px-0 max-w-none lg:max-w-xl mx-auto lg:mx-0">
-               A motivated and versatile software engineering student passionate
-               about full-stack development. Skilled in crafting creative, efficient
-               solutions with modern technologies, I thrive in collaborative, dynamic
-               environments and am eager to contribute to impactful projects while
-               continuously learning and innovating.
+              {/* Description paragraph - shows on desktop here, hidden on mobile */}
+              <p className="hidden lg:block text-[var(--text-muted)] text-base text-center lg:text-left px-4 lg:px-0 max-w-none lg:max-w-xl mx-auto lg:mx-0">
+               Motivated software engineering student passionate about full-stack development. Skilled in building creative, efficient solutions with modern technologies and eager to contribute to impactful projects while continuously learning.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 mt-6">
@@ -736,6 +834,13 @@ export default function Home() {
                     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.24 1.84 1.24 1.07 1.835 2.805 1.305 3.49.997.108-.775.418-1.305.76-1.605-2.665-.3-5.467-1.335-5.467-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.096.81 2.21 0 1.595-.015 2.88-.015 3.27 0 .32.21.694.825.576C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z" />
                   </svg>
                 </a>
+              </div>
+
+              {/* Description paragraph - shows on mobile after social links with extra spacing */}
+              <div className="mt-16 mb-8 lg:hidden">
+                <p className="text-[var(--text-muted)] text-base text-center px-4 max-w-none mx-auto">
+                 Motivated software engineering student passionate about full-stack development. Skilled in building creative, efficient solutions with modern technologies and eager to contribute to impactful projects while continuously learning.
+                </p>
               </div>
             </div>
 
@@ -1031,7 +1136,7 @@ export default function Home() {
               
               {/* Problem Solving */}
               <div className="relative p-6 transition-all duration-500 border shadow-xl group bg-white/5 border-white/10 rounded-3xl backdrop-blur-xl hover:bg-white/8 hover:border-purplr-500/30 hover:shadow-green-500/10">
-                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-purple-500/5 via-transparent to-emerald-600/5 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 transition-opacity duration-500 opacity-0 rounded-3xl bg-gradient-to-br from-green-500/5 via-transparent to-emerald-600/5 group-hover:opacity-100"></div>
                 <div className="relative z-10 space-y-4">
                   <div className="text-center">
                     <div className="flex items-center justify-center w-16 h-16 p-4 mx-auto mb-4 rounded-full bg-purple-500/20">
