@@ -538,6 +538,27 @@ export default function Home() {
             opacity: 1 !important;
             transform: translateY(0) !important;
           }
+          
+          /* Fix background image on mobile */
+          .bg-cover {
+            background-attachment: scroll !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+          }
+          
+          /* Ensure background covers full screen on mobile */
+          main {
+            min-height: 100vh;
+            min-height: 100dvh;
+          }
+          
+          /* iOS Safari specific fixes */
+          @supports (-webkit-appearance: none) {
+            .bg-cover {
+              background-attachment: scroll !important;
+            }
+          }
         }        .stagger-1 { transition-delay: 0.2s; }
         .stagger-2 { transition-delay: 0.4s; }
         .stagger-3 { transition-delay: 0.6s; }
@@ -550,10 +571,13 @@ export default function Home() {
       `}</style>
       
       <main className="min-h-screen text-[var(--text)] relative transition-all duration-300 ease-in-out">
-      {/* Background image with dark gray overlay - Fixed to viewport */}
+      {/* Background image with dark gray overlay - Responsive for mobile */}
       <div 
-        className="fixed inset-0 transition-all duration-700 ease-in-out bg-fixed bg-center bg-no-repeat bg-cover"
-        style={{ backgroundImage: 'url(/background.jpg)' }}
+        className="fixed inset-0 transition-all duration-700 ease-in-out bg-center bg-no-repeat bg-cover md:bg-fixed bg-scroll"
+        style={{ 
+          backgroundImage: 'url(/background.jpg)',
+          minHeight: '100vh'
+        }}
       />
       <div className="fixed inset-0 bg-black/50 backdrop-blur-[1.5px] transition-all duration-500 ease-in-out" />
       
