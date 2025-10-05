@@ -86,7 +86,7 @@ export default function Home() {
       const data = await response.json()
       
       if (response.ok) {
-        setSubmitStatus('Message sent successfully! I&apos;ll get back to you soon.')
+        setSubmitStatus('Message sent successfully! I\'ll get back to you soon.')
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
         setSubmitStatus(`Failed to send message: ${data.error || 'Unknown error'}`)
@@ -995,7 +995,7 @@ export default function Home() {
               <h3 className="mb-6 text-2xl font-bold text-blue-300 font-title">Send Message</h3>
               
               {submitStatus && (
-                <div className={`mb-6 p-4 rounded-lg ${submitStatus.toLowerCase().includes('failed') ? 'bg-red-500/20 border border-red-500/50 text-red-300' : 'bg-purple-500/20 border border-purple-500/50 text-purple-300'} text-center font-medium`}>
+                <div className={`mb-6 p-4 rounded-lg ${submitStatus.toLowerCase().includes('failed') ? 'bg-red-500/20 border border-red-500/50 text-red-300' : 'bg-green-500/20 border border-green-500/50 text-green-300'} text-center font-medium`}>
                   {submitStatus}
                 </div>
               )}
