@@ -722,7 +722,7 @@ export default function Home() {
 
                 {/* portrait (increased size) */}
                 <div className="relative overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl w-72 h-72 md:w-96 md:h-96">
-                  <Image src="/propic.png" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
+                  <Image src="/propic.jpg" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
                 </div>
             </div>
           </div>
