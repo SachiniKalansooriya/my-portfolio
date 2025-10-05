@@ -292,7 +292,7 @@ export default function Home() {
         "Built the wardrobe management system with database integration",
         "Implemented outfit recommendation logic based on wardrobe, weather, and user preferences",
       ],
-      images: [ "/styra2.PNG","/styra1.PNG", "/styra3.PNG","/styra5.PNG","/styra4.PNG"],
+      images: [ "/styra5.PNG","/styra1.PNG", "/styra3.PNG","/styra4.PNG","/styra2.PNG"],
       type: "Mobile Application",
       repoUrl: "https://github.com/SachiniKalansooriya/Styra",
     },
