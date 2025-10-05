@@ -559,6 +559,18 @@ export default function Home() {
               background-attachment: scroll !important;
             }
           }
+          
+          /* Center profile picture on mobile */
+          #home {
+            place-items: center;
+          }
+          
+          #home > div:last-child {
+            display: flex;
+            justify-content: center !important;
+            align-items: center;
+            width: 100%;
+          }
         }        .stagger-1 { transition-delay: 0.2s; }
         .stagger-2 { transition-delay: 0.4s; }
         .stagger-3 { transition-delay: 0.6s; }
@@ -716,12 +728,12 @@ export default function Home() {
 
                     {/* Right portrait with circular backdrop */}
           <div className="relative flex justify-center lg:justify-end">
-                <div className="relative w-96 h-96 md:w-[36rem] md:h-[36rem] flex items-center justify-center">
+                <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] flex items-center justify-center">
                 {/* big circular backdrop (larger) */}
-                <div className="absolute w-96 h-96 md:w-[36rem] md:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 -right-4 -top-6" />
+                <div className="absolute w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 -right-2 -top-3 lg:-right-4 lg:-top-6" />
 
-                {/* portrait (increased size) */}
-                <div className="relative overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl w-72 h-72 md:w-96 md:h-96">
+                {/* portrait (responsive size) */}
+                <div className="relative w-64 h-64 overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
                   <Image src="/propic.jpg" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
                 </div>
             </div>
