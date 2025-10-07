@@ -413,6 +413,32 @@ export default function Home() {
     },
     {
       id: 5,
+      title: "TO-DO — Full‑stack Task Management App",
+      subtitle: "Individual Project",
+      role: "Full-Stack Developer",
+      timeline: "oct 2025",
+     technologies: [
+    "Angular", "TypeScript", "RxJS", "Tailwind CSS",
+    "Spring Boot", "Java", "Spring Security (OAuth2 & JWT)",
+    "MySQL", "Spring Data JPA", "Maven"
+  ],
+      description: "A responsive full‑stack todo management app with Google OAuth2 sign‑in, JWT‑secured REST APIs, MySQL persistence, Kanban board and calendar views, advanced filtering, and reactive state management.",
+      responsibilities: [
+    "Implemented Google OAuth2 sign-in and issued JWTs via a custom OAuth2 success handler",
+    "Built secure, stateless backend APIs with Spring Security and JWT token validation",
+    "Designed MySQL schema and Spring Data JPA entities for users and tasks",
+    "Developed Angular frontend with Kanban (board) and calendar views using Tailwind CSS",
+    "Implemented task CRUD, priority/status workflows, due‑date handling",
+    "Added filtering, search, and date‑range queries; used RxJS for reactive state and real‑time updates",
+    "Created HTTP interceptors to attach Bearer tokens and centralised error/loading handling",
+    "Validated forms with Angular reactive forms and added accessible, mobile‑first UI"
+  ],
+      images: ["/todo1.png","/todo2.png", "/todo3.png"],
+      type: "Web Application",
+      repoUrl: "https://github.com/SachiniKalansooriya/todo-web-app",
+    },
+    {
+      id: 6,
       title: "SafeRoute - A web app for safe route planning and hazard reporting",
       subtitle: "Group Project",
       role: "Full-Stack Developer",
@@ -429,7 +455,7 @@ export default function Home() {
       repoUrl: "https://github.com/BGMPrabuddhi/iwb25-402-mindkraft",
     },
     {
-      id: 7,
+      id: 8,
       title: "Personal Portfolio Website",
       subtitle: "Individual Project",
       role: "Full-Stack Developer, Designer",
@@ -449,7 +475,7 @@ export default function Home() {
     },
 
     {
-      id: 8,
+      id: 9,
       title: "MEDISYNC - Smart Medicine Dispenser & Reminder",
       subtitle: "First year Hardware Group Project",
       role: "Embedded Systems Developer, Hardware Designer",
