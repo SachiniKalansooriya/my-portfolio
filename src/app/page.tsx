@@ -413,7 +413,7 @@ export default function Home() {
     },
     {
       id: 5,
-      title: "TO-DO — Full‑stack Task Management App",
+      title: "TO-DO — Web App",
       subtitle: "Individual Project",
       role: "Full-Stack Developer",
       timeline: "oct 2025",
