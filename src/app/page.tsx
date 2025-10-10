@@ -819,9 +819,9 @@ export default function Home() {
 
         {/* HOME SECTION */}
         <section id="home" className="min-h-screen pt-6 pb-12">
-          <div className="grid items-start grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="grid items-center grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Left content */}
-            <div className="max-w-xl space-y-6 lg:order-1">
+            <div className="max-w-xl space-y-6 lg:order-1 lg:justify-self-start">
               <div className="text-xl font-semibold text-center text-transparent bg-gradient-to-r from-purple-500 via-blue-600 to-indigo-600 bg-clip-text lg:text-left">Hey there,</div>
 
               <h1 className="text-4xl font-extrabold leading-tight text-center md:text-5xl lg:text-6xl lg:text-left">
@@ -873,12 +873,12 @@ export default function Home() {
             </div>
 
             {/* Right portrait with circular backdrop - Desktop only */}
-            <div className="relative justify-center hidden lg:flex lg:justify-end lg:order-2">
-              <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] flex items-center justify-center">
+            <div className="relative justify-center hidden lg:flex lg:justify-center lg:order-2">
+              <div className="relative flex items-center justify-center w-80 h-80 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[30rem] lg:h-[30rem]">
                 {/* Desktop backdrop */}
-                <div className="absolute w-72 h-72 sm:w-80 sm:h-80 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 md:-right-4 md:-top-6" />
+                <div className="absolute w-72 h-72 sm:w-80 sm:h-80 md:w-[28rem] md:h-[28rem] lg:w-[30rem] lg:h-[30rem] rounded-full bg-[var(--surface)]/20 border-1 border-gray-600 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                 {/* Desktop profile picture */}
-                <div className="relative w-64 h-64 overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                <div className="relative w-64 h-64 overflow-hidden border-2 border-gray-500 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-72 md:h-72 lg:w-80 lg:h-80">
                   <Image src="/propic.jpg" alt="Profile" className="object-cover w-full h-full" width={384} height={384} />
                 </div>
               </div>
