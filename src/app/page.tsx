@@ -294,6 +294,8 @@ export default function Home() {
       { name: "CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
       { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" },
+      { name: "Spring Boot", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
       { name: "Three.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
       { name: "Node", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
       { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
@@ -455,7 +457,7 @@ export default function Home() {
       repoUrl: "https://github.com/BGMPrabuddhi/iwb25-402-mindkraft",
     },
     {
-      id: 8,
+      id: 7,
       title: "Personal Portfolio Website",
       subtitle: "Individual Project",
       role: "Full-Stack Developer, Designer",
@@ -475,7 +477,7 @@ export default function Home() {
     },
 
     {
-      id: 9,
+      id: 8,
       title: "MEDISYNC - Smart Medicine Dispenser & Reminder",
       subtitle: "First year Hardware Group Project",
       role: "Embedded Systems Developer, Hardware Designer",
