@@ -413,7 +413,7 @@ export default function Home() {
     },
     {
       id: 5,
-      title: "TO-DO — Web App",
+      title: "To-Do — Web App",
       subtitle: "Individual Project",
       role: "Full-Stack Developer",
       timeline: "oct 2025",
