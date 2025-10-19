@@ -445,7 +445,7 @@ export default function Home() {
       subtitle: "Group Project",
       role: "Full-Stack Developer",
       timeline: "Aug 2025",
-      technologies: ["Next.js", "Ballerina", "PostgreSQL", "Tailwind CSS"],
+      technologies: ["Next.js", "Ballerina", "PostgreSQL", "Tailwind CSS", "Google Maps API", "REST API", "JWT Authentication"],
       description: "SafeRoute lets users report road hazards with images, view nearby hazards, and get safe route suggestions. It includes user profiles, reports history and an RDA dashboard.",
       responsibilities: [
         "Built hazard report submission with images and geolocation",
