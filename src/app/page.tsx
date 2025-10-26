@@ -374,7 +374,7 @@ export default function Home() {
         "Developed snap-to-grid functionality for all shapes",
         "Enabled users to create, save, and load custom designs.",
         "Engineered interactive 2D shape creation tools with real-time editing and grouping features",
-        "Designedandintegrated OBJfileimport/exportfunctionality"
+        "Designed and integrated OBJ file import/export functionality"
       ],
       images: ["/webcad2.png","/webcad1.png",  "/webcad3.png", "/webcad4.png"],
       type: "Web Application",
