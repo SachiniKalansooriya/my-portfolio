@@ -373,7 +373,7 @@ export default function Home() {
         "Building features that enabled user account personalization",
         "Developed snap-to-grid functionality for all shapes",
         "Enabled users to create, save, and load custom designs.",
-        "Engineeredinteractive 2D shape creation tools with real-time editing and grouping features",
+        "Engineered interactive 2D shape creation tools with real-time editing and grouping features",
         "Designedandintegrated OBJfileimport/exportfunctionality"
       ],
       images: ["/webcad2.png","/webcad1.png",  "/webcad3.png", "/webcad4.png"],
