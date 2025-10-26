@@ -357,7 +357,7 @@ export default function Home() {
         "Containerizing the system for efficient deployment.",
         "Integrating a Generative AI chatbot for appointment slot checking."
       ],
-      images: ["/Autocare.png"],
+      images: ["/Autocare.png","/autocare2.png","autocare3.png"],
       type: "Web Application",
       repoUrl: "private",
     },
@@ -373,7 +373,8 @@ export default function Home() {
         "Building features that enabled user account personalization",
         "Developed snap-to-grid functionality for all shapes",
         "Enabled users to create, save, and load custom designs.",
-        "Built backend APIs for efficient user data storage and feature support",
+        "Engineeredinteractive 2D shape creation tools with real-time editing and grouping features",
+        "Designedandintegrated OBJfileimport/exportfunctionality"
       ],
       images: ["/webcad2.png","/webcad1.png",  "/webcad3.png", "/webcad4.png"],
       type: "Web Application",
