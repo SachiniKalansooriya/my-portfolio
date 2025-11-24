@@ -358,8 +358,9 @@ export default function Home() {
         "Integrating a Generative AI chatbot for appointment slot checking."
       ],
       images: ["/Autocare.png","/autocare2.png","autocare3.png"],
+      repoUrl:"https://github.com/ColabDevelopers",
       type: "Web Application",
-      repoUrl: "private",
+     
     },
     {
       id: 2,
@@ -457,8 +458,33 @@ export default function Home() {
       type: "Web Application",
       repoUrl: "https://github.com/BGMPrabuddhi/iwb25-402-mindkraft",
     },
+
     {
       id: 7,
+      title: "AuroFit - Health and Wellness App",
+      subtitle: "Individual Project",
+      role: "Mobile App Developer",
+      timeline: "Nov 2025",
+      technologies: ["React Native", "Expo", "TypeScript", "React-navigation", "Redux Toolkit", "AsyncStorage","Expo-Router","expo-linear-gradient","API-Ninjas","DummyJSON"],
+      description: "AI-powered wardrobe stylist mobile app that analyzes clothing, manages wardrobe and recommends outfits based on weather and preferences.",
+      responsibilities: [
+        "Designed and implemented exercise tracking with categories, images, and detailed info.",
+        "Built workout logging with customizable sets, reps, weight, duration, and notes.",
+        "Developed favorites system with persistent storage and dedicated screen.",
+        "Integrated daily water intake tracking with customizable goals and charts.",
+        "Added dark mode support.",
+        "Created daily wellness tips feature with categorized tips.",
+        "Applied modern UI/UX with glass morphism, gradients, and smooth animations.",
+        "Implemented secure user authentication and persistent session management.",
+        "Used Redux Toolkit for state management and AsyncStorage for local persistence.",
+        "Connected to API-Ninjas for exercise data and DummyJSON for demo authentication."
+      ],
+      images: [ "/auro1.PNG","/auro2.PNG", "/auro3.PNG","/auro4.PNG","/auro5.PNG","/auro6.PNG","/auro7.PNG","/auro8.PNG","/auro9.PNG",],
+      type: "Mobile Application",
+      repoUrl: "https://github.com/SachiniKalansooriya/AuroFit",
+    },
+    {
+      id: 8,
       title: "Personal Portfolio Website",
       subtitle: "Individual Project",
       role: "Full-Stack Developer, Designer",
@@ -478,7 +504,7 @@ export default function Home() {
     },
 
     {
-      id: 8,
+      id: 9,
       title: "MEDISYNC - Smart Medicine Dispenser & Reminder",
       subtitle: "First year Hardware Group Project",
       role: "Embedded Systems Developer, Hardware Designer",
@@ -504,7 +530,7 @@ export default function Home() {
     },
 
     {
-      id: 9,
+      id: 10,
       title: "DIGITAL STORE",
       subtitle: "Individual Project",
       role: "UI/UX Designer",
@@ -844,7 +870,9 @@ export default function Home() {
 
               {/* Description paragraph - shows on desktop here, hidden on mobile */}
               <p className="hidden lg:block text-[var(--text-muted)] text-base text-center lg:text-left px-4 lg:px-0 max-w-none lg:max-w-xl mx-auto lg:mx-0">
-               Motivated software engineering student passionate about full-stack development. Skilled in building creative, efficient solutions with modern technologies and eager to contribute to impactful projects while continuously learning.
+               Third-year IT undergraduate passionate about technology and innovation, with hands-on experience in full-stack development and secure software design. Adaptable to diverse architectures and development methodologies, thriving
+               in collaborative or independent settings. Strong problem-solving skills with growing interests in networking and cybersecurity. Fast learner and dedicated team player eager to contribute creativity and technical expertise to impactful
+               projects.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 mt-6">
@@ -868,7 +896,9 @@ export default function Home() {
               {/* Description paragraph - shows on mobile after social links with extra spacing */}
               <div className="mt-16 mb-8 lg:hidden">
                 <p className="text-[var(--text-muted)] text-base text-center px-4 max-w-none mx-auto">
-                 Motivated software engineering student passionate about full-stack development. Skilled in building creative, efficient solutions with modern technologies and eager to contribute to impactful projects while continuously learning.
+               Third-year IT undergraduate passionate about technology and innovation, with hands-on experience in full-stack development and secure software design. Adaptable to diverse architectures and development methodologies, thriving
+               in collaborative or independent settings. Strong problem-solving skills with growing interests in networking and cybersecurity. Fast learner and dedicated team player eager to contribute creativity and technical expertise to impactful
+               projects.
                 </p>
               </div>
             </div>
@@ -1626,7 +1656,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-semibold text-white/90">Location</p>
-                      <p className="text-white/70">Galle, Sri Lanka</p>
+                      <p className="text-white/70">Moratuwa,Sri Lanka</p>
                     </div>
                   </div>
 
