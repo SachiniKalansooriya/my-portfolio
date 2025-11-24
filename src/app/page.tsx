@@ -479,7 +479,7 @@ export default function Home() {
         "Used Redux Toolkit for state management and AsyncStorage for local persistence.",
         "Connected to API-Ninjas for exercise data and DummyJSON for demo authentication."
       ],
-      images: [ "/auro1.PNG","/auro2.PNG", "/auro3.PNG","/auro4.PNG","/auro5.PNG","/auro6.PNG","/auro7.PNG","/auro8.PNG","/auro9.PNG",],
+      images: [ "/auro1.png","/auro2.png", "/auro3.png","/auro4.png","/auro5.png","/auro6.png","/auro7.png","/auro8.png","/auro9.png",],
       type: "Mobile Application",
       repoUrl: "https://github.com/SachiniKalansooriya/AuroFit",
     },
