@@ -466,7 +466,7 @@ export default function Home() {
       role: "Mobile App Developer",
       timeline: "Nov 2025",
       technologies: ["React Native", "Expo", "TypeScript", "React-navigation", "Redux Toolkit", "AsyncStorage","Expo-Router","expo-linear-gradient","API-Ninjas","DummyJSON"],
-      description: "AI-powered wardrobe stylist mobile app that analyzes clothing, manages wardrobe and recommends outfits based on weather and preferences.",
+      description: "A comprehensive fitness and wellness tracking app built with React Native and Expo, designed to help users maintain a healthy lifestyle through exercise tracking, daily tips, and personalized wellness features.",
       responsibilities: [
         "Designed and implemented exercise tracking with categories, images, and detailed info.",
         "Built workout logging with customizable sets, reps, weight, duration, and notes.",
