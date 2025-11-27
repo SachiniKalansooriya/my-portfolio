@@ -876,7 +876,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4 mt-6">
-                <a href="/SachiniKalansooriyaCV.pdf" download className="relative inline-flex items-center px-5 py-3 overflow-hidden font-medium text-white transition-all duration-300 transform border rounded-md shadow-lg bg-purple-600/20 backdrop-blur-md border-purple-500/60 hover:bg-purple-600/30 hover:shadow-purple-500/25 hover:scale-105 group">
+                <a href="/Sachini_Kalansooriya.pdf" download className="relative inline-flex items-center px-5 py-3 overflow-hidden font-medium text-white transition-all duration-300 transform border rounded-md shadow-lg bg-purple-600/20 backdrop-blur-md border-purple-500/60 hover:bg-purple-600/30 hover:shadow-purple-500/25 hover:scale-105 group">
                   <span className="absolute inset-0 transition-all duration-700 transform -translate-x-full opacity-0 bg-gradient-to-r from-white/10 via-white/20 to-transparent group-hover:opacity-100 group-hover:translate-x-full"></span>
                   <span className="relative">Download CV</span>
                 </a>
@@ -1680,7 +1680,7 @@ export default function Home() {
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold text-blue-300 font-title">Follow Me</h3>
                   <a
-                    href="/SachiniKalansooriyaCV.pdf"
+                    href="/Sachini_Kalansooriya.pdf"
                     download
                     className="inline-flex items-center px-4 py-2 font-medium text-white transition-all duration-300 border rounded-lg shadow-lg bg-blue-600/20 backdrop-blur-md border-blue-500/60 hover:bg-blue-600/40 hover:shadow-blue-500/25 hover:scale-105"
                   >
