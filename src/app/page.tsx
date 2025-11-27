@@ -993,7 +993,8 @@ export default function Home() {
                     </h3>
                     <div className="mb-4 space-y-2">
                       <p className="text-lg font-semibold text-blue-300">
-                        Anuladevi Balika Vidyalaya
+                        Anuladevi Balika Vidyalaya <br/>
+                        Galle 
                       </p>
                     </div>
                     {/* Moved date badge to bottom */}
